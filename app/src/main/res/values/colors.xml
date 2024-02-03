@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="orange">#EF8320</color>
+    <color name="dark_orange">#E93900</color>
+    <color name="light_orange">#FFB775</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="black_t">#E9000000</color>
+    <color name="text">#212121</color>
+    <color name="red">#FF0000</color>
+    <color name="light_black">#212121</color>
+    <color name="button_color">#E93900</color>
+    <color name="blue">#246BFD</color>
+    <color name="text_blue">#0066FF</color>
+    <color name="bg_color">#E1F6F6F6</color>
+    <color name="light_gray">#E1EFEFEF</color>
+    <color name="gray">#9E9E9E</color>
+    <color name="et_gray">#E9E9E9</color>
+    <!-- Dialog -->
+    <color name="dialog_background">#663c4a59</color>
+    <color name="ripple">#26000000</color>
+
+
+    <!--    chat-->
+    <color name="chat_background">#DED7E6</color>
+    <color name="background_chat_incoming">#FFFFFFFF</color>
+    <color name="background_chat_outgoing">#FF6200EE</color>
+    <color name="incoming_message_text">@color/black</color>
+    <color name="incoming_time_text">@color/black</color>
+    <color name="outgoing_message_text">@color/white</color>
+    <color name="outgoing_time_text">#8E99BF</color>
+    <color name="divider_color">#636465</color>
+
+    <color name="localBackground">#827b92</color>
+    <color name="remoteBackground">#484258</color>
+
+
+</resources>

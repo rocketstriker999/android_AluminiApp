@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "944011553901",
+    "project_id": "sanatan-shilpi-sansthan",
+    "storage_bucket": "sanatan-shilpi-sansthan.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944011553901:android:eb24b99a670e52fd922364",
+        "android_client_info": {
+          "package_name": "com.sanatanshilpi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "944011553901-6u2t8ct3mb6cb6lelmhk9kmqgt2903pn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBMi4iDMKhB6s4KNcjXjm8r0nf3YrNWIo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "944011553901-6u2t8ct3mb6cb6lelmhk9kmqgt2903pn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "944011553901-et6g7ctp1h1ucaebh9m8r26i3r7ha4ku.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.itw.sanatanshilpi"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

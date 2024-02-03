@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 8.1.1" type="baseline" client="gradle" dependencies="false" name="AGP (8.1.1)" variant="fatal" version="8.1.1">
+
+    <issue
+        id="NotSibling"
+        message="`@+id/constraintLayout4` is not a sibling in the same `ConstraintLayout`"
+        errorLine1="        app:layout_constraintTop_toBottomOf=&quot;@+id/constraintLayout4&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_announcement.xml"
+            line="94"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="NotSibling"
+        message="`@+id/constraintLayout4` is not a sibling in the same `ConstraintLayout`"
+        errorLine1="        app:layout_constraintTop_toBottomOf=&quot;@+id/constraintLayout4&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/RaitaniyaSnsatha/res/layout/activity_announcement.xml"
+            line="94"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="NotSibling"
+        message="`@+id/constraintLayout4` is not a sibling in the same `ConstraintLayout`"
+        errorLine1="        app:layout_constraintTop_toBottomOf=&quot;@+id/constraintLayout4&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_announcement.xml"
+            line="105"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="NotSibling"
+        message="`@+id/constraintLayout4` is not a sibling in the same `ConstraintLayout`"
+        errorLine1="        app:layout_constraintTop_toBottomOf=&quot;@+id/constraintLayout4&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/RaitaniyaSnsatha/res/layout/activity_announcement.xml"
+            line="105"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="NotSibling"
+        message="`@+id/constraintLayout4` is not a sibling in the same `ConstraintLayout`"
+        errorLine1="                app:layout_constraintTop_toBottomOf=&quot;@+id/constraintLayout4&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_job.xml"
+            line="369"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="NotSibling"
+        message="`@+id/constraintLayout4` is not a sibling in the same `ConstraintLayout`"
+        errorLine1="                app:layout_constraintTop_toBottomOf=&quot;@+id/constraintLayout4&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/RaitaniyaSnsatha/res/layout/activity_job.xml"
+            line="369"
+            column="17"/>
+    </issue>
+
+</issues>

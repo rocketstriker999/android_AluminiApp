@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="16dp"
+    android:layout_margin="5dp"
+    tools:context=".ui.group.GroupBottomDialogFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradient_bs_bg"
+        android:orientation="vertical">
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fillViewport="true"
+            android:scrollbars="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider5">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clAnnouncement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivAnnouncement"
+                        android:layout_width="70dp"
+                        android:layout_height="0dp"
+                        android:layout_margin="10dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@color/light_orange"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/announcement"
+                        app:layout_constraintDimensionRatio="h,1:1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shapeAppearanceOverlay="@style/circleImageView"
+                        app:strokeColor="@android:color/darker_gray" />
+
+                    <TextView
+                        android:id="@+id/tvAnnouncement"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/urbanist_regular"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="Announcement"
+                        android:textColor="#212121"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/ivAnnouncement"
+                        app:layout_constraintStart_toStartOf="@+id/ivAnnouncement"
+                        app:layout_constraintTop_toBottomOf="@+id/ivAnnouncement" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clJob"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/clAnnouncement"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivJob"
+                        android:layout_width="70dp"
+                        android:layout_height="0dp"
+                        android:layout_margin="10dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@color/light_orange"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/job"
+                        app:layout_constraintDimensionRatio="h,1:1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shapeAppearanceOverlay="@style/circleImageView"
+                        app:strokeColor="@android:color/darker_gray" />
+
+                    <TextView
+                        android:id="@+id/tvJob"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/urbanist_regular"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="Job"
+                        android:textColor="#212121"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/ivJob"
+                        app:layout_constraintStart_toStartOf="@+id/ivJob"
+                        app:layout_constraintTop_toBottomOf="@+id/ivJob" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clLetsMeet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/clJob"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivLetsMeet"
+                        android:layout_width="70dp"
+                        android:layout_height="0dp"
+                        android:layout_margin="10dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@color/light_orange"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/let_s_meet"
+                        app:layout_constraintDimensionRatio="h,1:1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shapeAppearanceOverlay="@style/circleImageView"
+                        app:strokeColor="@android:color/darker_gray" />
+
+                    <TextView
+                        android:id="@+id/tvLetsMeet"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/urbanist_regular"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="Let's Meet"
+                        android:textColor="#212121"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/ivLetsMeet"
+                        app:layout_constraintStart_toStartOf="@+id/ivLetsMeet"
+                        app:layout_constraintTop_toBottomOf="@+id/ivLetsMeet" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clPhotoWithLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/clLetsMeet"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivPhotoWithLocation"
+                        android:layout_width="70dp"
+                        android:layout_height="0dp"
+                        android:layout_margin="10dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@color/light_orange"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_with_location"
+                        app:layout_constraintDimensionRatio="h,1:1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shapeAppearanceOverlay="@style/circleImageView"
+                        app:strokeColor="@android:color/darker_gray" />
+
+                    <TextView
+                        android:id="@+id/tvPhotoWithLocation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/urbanist_regular"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="Photo With Location"
+                        android:textColor="#212121"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/ivPhotoWithLocation"
+                        app:layout_constraintStart_toStartOf="@+id/ivPhotoWithLocation"
+                        app:layout_constraintTop_toBottomOf="@+id/ivPhotoWithLocation" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clQnA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/clPhotoWithLocation"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivQnA"
+                        android:layout_width="70dp"
+                        android:layout_height="0dp"
+                        android:layout_margin="10dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@color/light_orange"
+                        android:scaleType="centerInside"
+                        app:layout_constraintDimensionRatio="h,1:1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shapeAppearanceOverlay="@style/circleImageView"
+                        app:srcCompat="@drawable/q_a"
+                        app:strokeColor="@android:color/darker_gray" />
+
+                    <TextView
+                        android:id="@+id/tvQnA"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/urbanist_regular"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="Q&amp;A"
+                        android:textColor="#212121"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/ivQnA"
+                        app:layout_constraintStart_toStartOf="@+id/ivQnA"
+                        app:layout_constraintTop_toBottomOf="@+id/ivQnA" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clQuickPoll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/clQnA"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivQuickPoll"
+                        android:layout_width="70dp"
+                        android:layout_height="0dp"
+                        android:layout_margin="10dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@color/light_orange"
+                        android:scaleType="centerInside"
+                        app:layout_constraintDimensionRatio="h,1:1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shapeAppearanceOverlay="@style/circleImageView"
+                        app:srcCompat="@drawable/quick_poll"
+                        app:strokeColor="@android:color/darker_gray" />
+
+                    <TextView
+                        android:id="@+id/tvQuickPoll"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/urbanist_regular"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="Quick Poll"
+                        android:textColor="#212121"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/ivQuickPoll"
+                        app:layout_constraintStart_toStartOf="@+id/ivQuickPoll"
+                        app:layout_constraintTop_toBottomOf="@+id/ivQuickPoll" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clSurvey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/clQuickPoll"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivSurvey"
+                        android:layout_width="70dp"
+                        android:layout_height="0dp"
+                        android:layout_margin="10dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@color/light_orange"
+                        android:scaleType="centerInside"
+                        app:layout_constraintDimensionRatio="h,1:1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shapeAppearanceOverlay="@style/circleImageView"
+                        app:srcCompat="@drawable/survey"
+                        app:strokeColor="@android:color/darker_gray" />
+
+                    <TextView
+                        android:id="@+id/tvSurvey"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/urbanist_regular"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="Survey"
+                        android:textColor="#212121"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/ivSurvey"
+                        app:layout_constraintStart_toStartOf="@+id/ivSurvey"
+                        app:layout_constraintTop_toBottomOf="@+id/ivSurvey" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </HorizontalScrollView>
+
+        <View
+            android:id="@+id/divider6"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider6">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clGallery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivGallery"
+                        android:layout_width="70dp"
+                        android:layout_height="0dp"
+                        android:layout_margin="10dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@color/white"
+                        android:scaleType="centerInside"
+                        app:layout_constraintDimensionRatio="h,1:1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shapeAppearanceOverlay="@style/circleImageView"
+                        app:srcCompat="@drawable/gallery"
+                        app:strokeColor="@android:color/darker_gray" />
+
+                    <TextView
+                        android:id="@+id/tvGallery"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/urbanist_regular"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="Gallery"
+                        android:textColor="#212121"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/ivGallery"
+                        app:layout_constraintStart_toStartOf="@+id/ivGallery"
+                        app:layout_constraintTop_toBottomOf="@+id/ivGallery" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clAudio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/clGallery"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivAudio"
+                        android:layout_width="70dp"
+                        android:layout_height="0dp"
+                        android:layout_margin="10dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@color/white"
+                        android:scaleType="centerInside"
+                        app:layout_constraintDimensionRatio="h,1:1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shapeAppearanceOverlay="@style/circleImageView"
+                        app:srcCompat="@drawable/audio"
+                        app:strokeColor="@android:color/darker_gray" />
+
+                    <TextView
+                        android:id="@+id/tvAudio"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/urbanist_regular"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="Audio"
+                        android:textColor="#212121"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/ivAudio"
+                        app:layout_constraintStart_toStartOf="@+id/ivAudio"
+                        app:layout_constraintTop_toBottomOf="@+id/ivAudio" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clVideo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/clAudio"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivVideo"
+                        android:layout_width="70dp"
+                        android:layout_height="0dp"
+                        android:layout_margin="10dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@color/white"
+                        android:scaleType="centerInside"
+                        app:layout_constraintDimensionRatio="h,1:1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shapeAppearanceOverlay="@style/circleImageView"
+                        app:srcCompat="@drawable/video"
+                        app:strokeColor="@android:color/darker_gray" />
+
+                    <TextView
+                        android:id="@+id/tvVideo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/urbanist_regular"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="Video"
+                        android:textColor="#212121"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/ivVideo"
+                        app:layout_constraintStart_toStartOf="@+id/ivVideo"
+                        app:layout_constraintTop_toBottomOf="@+id/ivVideo" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clContact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/clVideo"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivContact"
+                        android:layout_width="70dp"
+                        android:layout_height="0dp"
+                        android:layout_margin="10dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@color/white"
+                        android:scaleType="centerInside"
+                        app:layout_constraintDimensionRatio="h,1:1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shapeAppearanceOverlay="@style/circleImageView"
+                        app:srcCompat="@drawable/s_contact"
+                        app:strokeColor="@android:color/darker_gray" />
+
+                    <TextView
+                        android:id="@+id/tvContact"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/urbanist_regular"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="Contact"
+                        android:textColor="#212121"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/ivContact"
+                        app:layout_constraintStart_toStartOf="@+id/ivContact"
+                        app:layout_constraintTop_toBottomOf="@+id/ivContact" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </HorizontalScrollView>
+
+    </LinearLayout>
+
+
+    <!-- <RelativeLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content">
+
+         <TextView
+             android:id="@+id/tvAction"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentStart="true"
+             android:layout_centerInParent="true"
+             android:layout_marginStart="16dp"
+             android:layout_marginTop="16dp"
+             android:fontFamily="@font/urbanist_medium"
+             android:text="Actions"
+             android:textColor="@color/text"
+             android:textSize="20sp" />
+
+         <TextView
+             android:id="@+id/textView13"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentEnd="true"
+             android:layout_centerInParent="true"
+             android:layout_marginTop="16dp"
+             android:layout_marginEnd="16dp"
+             android:fontFamily="@font/urbanist_medium"
+             android:text="Add More+"
+             android:textColor="@color/text_blue"
+             android:textSize="14sp" />
+
+         <View
+             android:id="@+id/divider5"
+             android:layout_width="match_parent"
+             android:layout_height="1dp"
+             android:layout_below="@+id/textView13"
+             android:layout_marginStart="16dp"
+             android:layout_marginTop="8dp"
+             android:layout_marginEnd="16dp"
+             android:background="@color/gray" />
+
+     </RelativeLayout>-->
+
+
+</androidx.cardview.widget.CardView>

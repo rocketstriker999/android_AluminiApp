@@ -1,0 +1,151 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'
+
+}
+
+android {
+    signingConfigs {
+        RitanyaSanstha {
+            storeFile file('src\\RaitaniyaSnsatha\\RitaniyaSanstha.jks')
+            storePassword 'Ritanya@123'
+            keyAlias 'Ritanya'
+            keyPassword 'Ritanya@123'
+
+        }
+        SanatanShilpi {
+            storeFile file('src\\SanatanShilpiSnsatha\\SanatanShilpi.jks')
+            storePassword 'Sanatan@123'
+            keyAlias 'Sanatan'
+            keyPassword 'Sanatan@123'
+        }
+    }
+    namespace 'com.sanatanshilpisanstha'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.sanatanshilpisanstha"
+        minSdk 24
+        targetSdk 33
+        versionCode 3
+        versionName "1.2"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.RitanyaSanstha
+            debuggable true
+        }
+    }
+    buildFeatures {
+        viewBinding  true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    flavorDimensions 'Sanatan'
+    productFlavors {
+        //MAIN FOLDER/TARGET COMMON CODE FOR ALL PROJECT/ PRODUCT FLAVORS
+
+        SanatanShilpiSnsatha {
+            buildConfigField("String", "Santanshilpi", "\"SanatanShilpiSnsatha\"")
+            buildConfigField("String", "sanatanshilpisanstha", "\"app/src/SanatanShilpiSnsatha\"")
+            buildConfigField "String", "BASE_URL","\"https://sanatanshilpi.in/api/\""
+            buildConfigField "String", "About_us","\"https://sanatanshilpi.in/about-us\""
+            buildConfigField "String", "Contact_us","\"https://sanatanshilpi.in/contact-us\""
+            buildConfigField "String", "Privacy_policy","\"https://sanatanshilpi.in/privacy-policy\""
+
+            dimension = 'Sanatan'
+            applicationId "com.sanatanshilpi"
+            minSdk 24
+            targetSdk 33
+            versionCode 3
+            versionName "1.2"
+            resValue "string", "Sanatan", "This is the Santan"
+        }
+
+        RaitaniyaSnsatha {
+            buildConfigField("String", "ritanya", "\"RaitaniyaSnsatha\"")
+            buildConfigField("String", "ritanyasanstha", "\"app/src/RaitaniyaSnsatha\"")
+            buildConfigField "String", "BASE_URL","\"https://ritanyasanstha.in/api/\""
+            buildConfigField "String", "About_us","\"https://ritanyasanstha.in/about-us\""
+            buildConfigField "String", "Contact_us","\"https://ritanyasanstha.in/contact-us\""
+            buildConfigField "String", "Privacy_policy","\"https://ritanyasanstha.in/privacy-policy\""
+
+            dimension = 'Sanatan'
+            applicationId "com.ritanyasanstha"
+            minSdk 24
+            targetSdk 33
+            versionCode 6
+            versionName "1.6"
+            resValue "string", "RitaniyaSanstha", "This is the RitaniyaSanstha"
+
+        }
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.firebase:firebase-auth:22.3.1'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+//    androidx
+    implementation "androidx.multidex:multidex:2.0.1"
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+
+    //FireBase
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.2.1'
+    implementation platform('com.google.firebase:firebase-bom:32.0.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+//    GSM
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+
+    //  retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+
+    // Coroutine & Life Cycle
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+
+    implementation 'com.github.Ajinkrishnak:CountryCodePicker:1.0.2'
+
+
+//    Firebase
+    implementation platform('com.google.firebase:firebase-bom:31.2.2')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
+
+    implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
+    implementation("io.coil-kt:coil:2.2.2")
+    implementation 'org.threeten:threetenbp:1.4.4' // Java 8 Date-Time API backport for older Android versions
+
+    //For product flavour multiple google service json
+    implementation 'com.google.android.gms:play-services-maps:18.2.0'
+    implementation 'com.google.maps.android:android-maps-utils:3.4.0'
+    implementation 'io.agora.rtc:full-sdk:4.0.1'
+
+//Pusher Chat
+    implementation 'com.pusher:pusher-java-client:2.4.4'
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'com.loopj.android:android-async-http:1.4.9'
+    implementation 'androidx.browser:browser:1.5.0'
+
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.sanatanshilpisanstha.ui.bottom_navigation.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_directory"
+        android:name="com.sanatanshilpisanstha.ui.bottom_navigation.HomeDirectoryFragment"
+        android:label="@string/directory"
+        tools:layout="@layout/fragment_home_directory" />
+
+    <fragment
+        android:id="@+id/navigation_boards"
+        android:name="com.sanatanshilpisanstha.ui.bottom_navigation.BoardsFragment"
+        android:label="@string/boards"
+        tools:layout="@layout/fragment_home_directory" />
+    <fragment
+        android:id="@+id/navigation_connect"
+        android:name="com.sanatanshilpisanstha.ui.bottom_navigation.ConnectFragment"
+        android:label="@string/connect"
+        tools:layout="@layout/fragment_connect" />
+
+    <fragment
+    android:id="@+id/navigation_setting"
+    android:name="com.sanatanshilpisanstha.ui.bottom_navigation.SettingFragment"
+    android:label="@string/setting"
+    tools:layout="@layout/fragment_setting" />
+</navigation>

@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/gradient_bs_bg"
+
+    android:paddingBottom="16dp"
+    tools:context=".ui.group.GroupBottomDialogFragment">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/urbanist_medium"
+        android:text="Actions"
+        android:textColor="@color/text"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/urbanist_medium"
+        android:text="Add More+"
+        android:textColor="@color/text_blue"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clMultipleChoice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/clDropDown"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider5">
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivMultipleChoice"
+            android:layout_width="70dp"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/light_orange"
+            android:scaleType="centerInside"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:srcCompat="@drawable/q_a"
+            app:strokeColor="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/tvMultipleChoice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/urbanist_regular"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="Multiple Choice"
+            android:textColor="#212121"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="@+id/ivMultipleChoice"
+            app:layout_constraintStart_toStartOf="@+id/ivMultipleChoice"
+            app:layout_constraintTop_toBottomOf="@+id/ivMultipleChoice" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clDropDown"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/clText"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/clMultipleChoice"
+        app:layout_constraintTop_toBottomOf="@id/divider5">
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivDropDown"
+            android:layout_width="70dp"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/light_orange"
+            android:scaleType="centerInside"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:srcCompat="@drawable/baseline_keyboard_arrow_down_24"
+            app:strokeColor="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/tvDropDown"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/urbanist_regular"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="Drop Down"
+            android:textColor="#212121"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="@+id/ivDropDown"
+            app:layout_constraintStart_toStartOf="@+id/ivDropDown"
+            app:layout_constraintTop_toBottomOf="@+id/ivDropDown" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/clImage"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/clDropDown"
+        app:layout_constraintTop_toBottomOf="@id/divider5">
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivText"
+            android:layout_width="70dp"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/light_orange"
+            android:scaleType="centerInside"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:srcCompat="@drawable/text"
+            app:strokeColor="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/tvText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/urbanist_regular"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="Text"
+            android:textColor="#212121"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="@+id/ivText"
+            app:layout_constraintStart_toStartOf="@+id/ivText"
+            app:layout_constraintTop_toBottomOf="@+id/ivText" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clImage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/clText"
+        app:layout_constraintTop_toBottomOf="@id/divider5">
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivImage"
+            android:layout_width="70dp"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/light_orange"
+            android:scaleType="centerInside"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:srcCompat="@drawable/gallery"
+            app:strokeColor="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/tvImage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/urbanist_regular"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="Image"
+            android:textColor="#212121"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="@+id/ivImage"
+            app:layout_constraintStart_toStartOf="@+id/ivImage"
+            app:layout_constraintTop_toBottomOf="@+id/ivImage" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <View
+        android:id="@+id/divider6"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clImage" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clNumeric"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/clDropDown"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider6">
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivNumeric"
+            android:layout_width="70dp"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/light_orange"
+            android:scaleType="centerInside"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:srcCompat="@drawable/numeric"
+            app:strokeColor="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/tvNumeric"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/urbanist_regular"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="Numeric"
+            android:textColor="#212121"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="@+id/ivNumeric"
+            app:layout_constraintStart_toStartOf="@+id/ivNumeric"
+            app:layout_constraintTop_toBottomOf="@+id/ivNumeric" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clPhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/clText"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/clMultipleChoice"
+        app:layout_constraintTop_toBottomOf="@id/divider6">
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivPhone"
+            android:layout_width="70dp"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/light_orange"
+            android:scaleType="centerInside"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:srcCompat="@drawable/phone_number"
+            app:strokeColor="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/tvPhone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/urbanist_regular"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="Phone Number"
+            android:textColor="#212121"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="@+id/ivPhone"
+            app:layout_constraintStart_toStartOf="@+id/ivPhone"
+            app:layout_constraintTop_toBottomOf="@+id/ivPhone" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/clImage"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/clDropDown"
+        app:layout_constraintTop_toBottomOf="@id/divider6">
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivDate"
+            android:layout_width="70dp"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/light_orange"
+            android:scaleType="centerInside"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:srcCompat="@drawable/calendar"
+            app:strokeColor="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/urbanist_regular"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="Let's Meet"
+            android:textColor="#212121"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="@+id/ivDate"
+            app:layout_constraintStart_toStartOf="@+id/ivDate"
+            app:layout_constraintTop_toBottomOf="@+id/ivDate" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clhjhjvhv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/clText"
+        app:layout_constraintTop_toBottomOf="@id/divider6">
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/hjhjvhv"
+            android:layout_width="70dp"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/light_orange"
+            android:scaleType="fitXY"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:strokeColor="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/tvhjhjvhv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/urbanist_regular"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="Photo With Location"
+            android:textColor="#212121"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="@+id/hjhjvhv"
+            app:layout_constraintStart_toStartOf="@+id/hjhjvhv"
+            app:layout_constraintTop_toBottomOf="@+id/hjhjvhv" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

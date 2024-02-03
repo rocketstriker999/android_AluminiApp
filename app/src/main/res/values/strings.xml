@@ -1,0 +1,83 @@
+<resources>
+    <string name="app_name">Sanatan shilpi Sanstha</string>
+    <string name="error_msg">Something went wrong.</string>
+    <string name="network_error_msg">No internet connection.</string>
+    <string name="title_activity_bottom_nav">BottomNavActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="directory">Directory</string>
+    <string name="boards">Boards</string>
+    <string name="connect">Connect</string>
+    <string name="service2">Select the Service 2</string>
+    <string name="service1">Select the Service 1</string>
+    <string name="education_skills_iitr"><![CDATA[Education & Skills IITR]]></string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit,  dolor in reprehenderit in voluptate velit esse cillum dolore</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="camera_req_title" translatable="false">Use your camera</string>
+    <string name="camera_req_msg" translatable="false">Camera is required to captured image.</string>
+    <string name="camera" translatable="false">Camera</string>
+
+    <string name="deny" translatable="false">Deny</string>
+    <string name="allow" translatable="false">Allow</string>
+
+    <string name="rationale_camera">Camera permission is required.</string>
+    <string name="permission_attach_file_rationale">Permission is required.</string>
+    <string name="ok">OK</string>
+    <string name="yes">Yes</string>
+    <string name="permission_necessary">Permission necessary</string>
+    <string name="camera_permission_is_necessary">Camera permission is necessary</string>
+
+    <string name="read_permission_is_necessary">Read External storage permission is necessary</string>
+    <string name="read_media_permission_is_necessary">Read Media permission is necessary</string>
+    <string name="type_here">Type Here...</string>
+    <string name="search">Search</string>
+    <string name="cancel">Cancel</string>
+    <string name="Submit">Submit</string>
+    <string name="please_type_here">Please type here</string>
+    <string name="setting">Setting</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="log_out">Log Out</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="about_us">About Us</string>
+    <string name="wantToLogout">Are you sure want to Logout?</string>
+    <string name="wantToDelAccount">Are you sure want to delete your account?</string>
+    <string name="ittrTxt">IITR Alumni Virtual Secretariat</string>
+    <string name="no">No</string>
+    <string name="select_batch">Select Batch</string>
+    <string name="submit">submit</string>
+    <string name="would_you_like_to_create_today">Hey! What would you like to create today</string>
+    <string name="start_conversations">Start Conversations</string>
+    <string name="start_a_conversation_with_everyone">Start a conversation with everyone</string>
+    <string name="let_meet">Let\'s Meet</string>
+    <string name="meet_your_old_friends">Meet your old friends</string>
+    <string name="organize_event">Organize Events</string>
+    <string name="connect_and_grow_your_network">Connect and grow your network</string>
+    <string name="create_a_conversation">Create a Conversation</string>
+    <string name="done">Done</string>
+    <string name="select">Select</string>
+    <string name="please_select_duration">Please select duration</string>
+    <string name="contact_list">Contact List</string>
+    <string name="select_an_option_to_delete_this_msg">Select an option to delete this msg?</string>
+    <string name="delete_for_me_only">Delete For Me only</string>
+    <string name="delete_for_everyone">Delete For Everyone</string>
+    <string name="default_notification_channel_id">com.sanatanshilpisanstha.urgent</string>
+
+    <string name="faster_verifications"> For faster verification: \n
+
+                         • Please upload an image of any evidence of your alumni status, and additionally \n
+                         • Mention your LinkedIn address in the Remarks column \n \n
+                        This app has following features: \n \n
+
+                         1. It is developed as a social initiative to connect alumni of leading institutes of engineering, medicine, management, research, law and others. (IITs, AIIMSs, IIMs, NLUs, IISERs etc). We expect that by December 2023 it will be a community of over 1 lac alumni of prestigious institutes. \n
+                         2. The development and running expenses of this app and platform are financed by a charitable trust created for this purpose. It is well-funded by contributions from various alumni. The basic connectivity and networking to of alumni is committed to be a free for lifetime for all institutes as it is backed up by this well-funded trust. \n
+                         3. The privacy of close community of your institute will be maintained at the same time where all members will have option to collaborate and connect to the larger world for professional or personal reasons \n
+                         4. It is our endeavour that it will essentially remain a self-governed community with the help of algorithms and automatic rules rather than manual intervention which will be extremely rare \n
+                        As you are aware, the Alumni Relay app is expiring on August 20, 2023 and the WhatsApp community Thomasonian Worldwide has also reached its limits for members. You are requested to fill up the form urgently so that no one is left out of this community app.</string>
+
+
+</resources>
