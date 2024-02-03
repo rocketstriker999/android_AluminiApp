@@ -3,19 +3,17 @@ package com.sanatanshilpisanstha.ui.connect
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import coil.load
 import com.sanatanshilpisanstha.R
 import com.sanatanshilpisanstha.callbackListener.onItemClickListener
 import com.sanatanshilpisanstha.data.entity.group.GroupMember
-import com.sanatanshilpisanstha.data.entity.group.GroupMembersSelect
 import com.sanatanshilpisanstha.databinding.ActivityGroupDetailsBinding
 import com.sanatanshilpisanstha.remote.APIResult
 import com.sanatanshilpisanstha.repository.GroupRepository
 import com.sanatanshilpisanstha.ui.BaseActivity
-import com.sanatanshilpisanstha.ui.adapter.GroupPartAdapter
 import com.sanatanshilpisanstha.ui.adapter.ParticipantsListMembersAdapter
+import com.sanatanshilpisanstha.ui.directory.DirectoryChatActivity
 import com.sanatanshilpisanstha.utility.Constant
 import com.sanatanshilpisanstha.utility.Extra
 import com.sanatanshilpisanstha.utility.Utilities
@@ -78,6 +76,7 @@ class GroupDetailsActivity : BaseActivity() , onItemClickListener {
 
 
     private fun getGroupMember() {
+
         scope.launch {
             groupRepository.getGroupMember(groupId) {
                 when (it) {
@@ -104,9 +103,18 @@ class GroupDetailsActivity : BaseActivity() , onItemClickListener {
     }
 
     override fun onItemClick(id: Int) {
+        Log.d("test", "$id")
         val i = Intent(this, ContactInfoActivity::class.java)
         i.putExtra(Extra.USER_ID, id)
         startActivity(i)
+    }
+
+    override fun onimgMessageClick(id: Int, username: String) {
+      val intent = Intent(this, DirectoryChatActivity::class.java)
+        intent.putExtra("userId", id)
+        intent.putExtra(Extra.GROUP_ID, id)
+        intent.putExtra(Extra.DIRECTORY_USER_NAME, username)
+        startActivity(intent)
     }
 
 }
