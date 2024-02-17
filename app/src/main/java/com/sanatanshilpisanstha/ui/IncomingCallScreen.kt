@@ -63,9 +63,9 @@ class IncomingCallScreen : AppCompatActivity() {
             finish()
         }
 
-        mediaPlayer?.setOnCompletionListener(OnCompletionListener {
+        mediaPlayer?.setOnCompletionListener {
             mediaPlayer?.start()
-        })
+        }
 
 
         binding.inComingCallDenied.setOnClickListener(View.OnClickListener {

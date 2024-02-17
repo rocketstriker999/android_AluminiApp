@@ -100,7 +100,7 @@ class AgoraCallingActivity : BaseActivity(),OnClickListener {
                 token = intent.getStringExtra("agora_token").toString()
                 channelName = intent.getStringExtra("channel_name").toString()
                 initAgoraEngineAndJoinChannel()
-                Log.e("initAgora=====>",intent.getBooleanExtra("FromNotification",false).toString())
+                Log.e("initAgoraFrom Notification=====>",intent.getBooleanExtra("FromNotification",false).toString())
             } else {
                 if (!intent.getStringExtra("chatID").toString().isBlank()) {
                     uid = intent.getStringExtra("chatID")?.toInt() ?: 0
@@ -151,6 +151,12 @@ class AgoraCallingActivity : BaseActivity(),OnClickListener {
     }
 
     private val mRtcEventHandler: IRtcEngineEventHandler = object : IRtcEngineEventHandler() {
+        override fun onJoinChannelSuccess(channel: String, uid: Int, elapsed: Int) {
+            isJoined = true
+            setupLocalVideo()
+            Log.e("isJoined=====>",isJoined.toString());
+        }
+
         // Listen for the remote host joining the channel to get the uid of the host.
         override fun onUserJoined(uid: Int, elapsed: Int) {
             showMessage("Remote user joined $uid")
@@ -158,26 +164,20 @@ class AgoraCallingActivity : BaseActivity(),OnClickListener {
             runOnUiThread { setupRemoteVideo(uid) }
         }
 
-        override fun onJoinChannelSuccess(channel: String, uid: Int, elapsed: Int) {
-            isJoined = true
-            Log.e("isJoined=====>",isJoined.toString());
-           // showMessage("Joined Channel $channel")
-        }
-
         override fun onUserOffline(uid: Int, reason: Int) {
-            Log.e("isJoined22222=====>","Remote user offline");
+            Log.e("onUserOffline=====>","Remote user offline");
             showMessage("Remote user offline $uid $reason")
         }
 
         override fun onWarning(warn: Int) {
             super.onWarning(warn)
-            println("CHANNEL ERROR "+warn.toString())
+            Log.e("onWarning=====>",warn.toString());
 
         }
 
         override fun onError(err: Int) {
             super.onError(err)
-            println("CHANNEL ERROR "+err.toString())
+            Log.e("onError=====>",err.toString());
         }
     }
 
@@ -271,7 +271,7 @@ class AgoraCallingActivity : BaseActivity(),OnClickListener {
             Log.e("Token",token)
             Log.e("channelName",channelName)
             Log.e("options",options.clientRoleType.toString())
-            setupLocalVideo()
+
 
             agoraEngine.startPreview();
             agoraEngine.joinChannel(token, channelName, uid, options)
