@@ -91,27 +91,27 @@ class AgoraCallingActivity : BaseActivity(),OnClickListener {
 
     private fun retrieveValue() {
 
+
         if(intent.extras!=null){
 
-            if(intent.getStringExtra("FromNotification").toString().equals("true")){
-                uid = preferenceManager.personID
 
+            if(intent.getBooleanExtra("FromNotification",false)){
+                uid = preferenceManager.personID
                 token = intent.getStringExtra("agora_token").toString()
                 channelName = intent.getStringExtra("channel_name").toString()
                 initAgoraEngineAndJoinChannel()
-                Log.e("initAgora=====>",intent.getStringExtra("FromNotification").toString())
+                Log.e("initAgora=====>",intent.getBooleanExtra("FromNotification",false).toString())
             } else {
-                if (intent.getStringExtra("chatID").toString().isNullOrBlank()) {
+                if (!intent.getStringExtra("chatID").toString().isBlank()) {
                     uid = intent.getStringExtra("chatID")?.toInt() ?: 0
                     getToken(uid.toString(),"")
-                    Log.e("GROUP_ID=====>", intent.getStringExtra(Extra.GROUP_ID).toString())
+                    Log.e("CHATID=====>", uid.toString())
                 }
                 else {
                     uid = intent.getStringExtra(Extra.GROUP_ID)?.toInt() ?: 0
                     getToken("",uid.toString())
                     Log.e("GROUP_ID=====>", intent.getStringExtra(Extra.GROUP_ID).toString())
                 }
-
             }
         }
     }
@@ -126,7 +126,6 @@ class AgoraCallingActivity : BaseActivity(),OnClickListener {
     private fun initAgoraEngineAndJoinChannel() {
         initializeAgoraEngine()
         setupVideoProfile()
-        setupLocalVideo()
         joinChannel()
     }
 
@@ -138,7 +137,8 @@ class AgoraCallingActivity : BaseActivity(),OnClickListener {
             config.mEventHandler = mRtcEventHandler
             agoraEngine = RtcEngine.create(config)
         } catch (e: Exception) {
-            showMessage(e.toString())
+            e.printStackTrace()
+            showMessage("ERROR_AGORA_INIT :"+e.toString())
         }
     }
 
@@ -154,7 +154,6 @@ class AgoraCallingActivity : BaseActivity(),OnClickListener {
         // Listen for the remote host joining the channel to get the uid of the host.
         override fun onUserJoined(uid: Int, elapsed: Int) {
             showMessage("Remote user joined $uid")
-
             // Set the remote video view
             runOnUiThread { setupRemoteVideo(uid) }
         }
@@ -168,7 +167,17 @@ class AgoraCallingActivity : BaseActivity(),OnClickListener {
         override fun onUserOffline(uid: Int, reason: Int) {
             Log.e("isJoined22222=====>","Remote user offline");
             showMessage("Remote user offline $uid $reason")
+        }
 
+        override fun onWarning(warn: Int) {
+            super.onWarning(warn)
+            println("CHANNEL ERROR "+warn.toString())
+
+        }
+
+        override fun onError(err: Int) {
+            super.onError(err)
+            println("CHANNEL ERROR "+err.toString())
         }
     }
 
@@ -253,7 +262,7 @@ class AgoraCallingActivity : BaseActivity(),OnClickListener {
         if (checkSelfPermission()) {
             val options = ChannelMediaOptions()
             options.channelProfile = Constants.CHANNEL_PROFILE_COMMUNICATION
-            if(intent.getStringExtra("FromNotification").toString().equals("true")){
+            if(intent.getBooleanExtra("FromNotification",false)){
                 options.clientRoleType = Constants.CLIENT_ROLE_AUDIENCE
 
             }else{
@@ -298,7 +307,7 @@ class AgoraCallingActivity : BaseActivity(),OnClickListener {
     fun getToken(userId: String,groupID:String) {
 
         scope.launch {
-            dashboardRepository.getAgoraToken(userId,groupID,"video") {
+            dashboardRepository.getAgoraToken(userId,"video",groupID) {
                 when (it) {
                     is APIResult.Success -> {
                         token = it.data.getAsJsonObject("data").get("agora_token").toString()
@@ -306,15 +315,14 @@ class AgoraCallingActivity : BaseActivity(),OnClickListener {
                         Log.e("token",token)
                         Log.e("channelName",channelName)
                         initAgoraEngineAndJoinChannel()
-
                     }
 
                     is APIResult.Failure -> {
                         Utilities.showErrorSnackBar(binding.cvRoot, it.message.toString())
                     }
 
-                    APIResult.InProgress -> {
-                    }
+                    is APIResult.InProgress->{}
+
 
                 }
             }
@@ -322,7 +330,7 @@ class AgoraCallingActivity : BaseActivity(),OnClickListener {
     }
 
     private fun startCall() {
-        setupLocalVideo()
+        //setupLocalVideo()
         joinChannel()
     }
 
