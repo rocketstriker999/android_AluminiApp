@@ -182,6 +182,7 @@ class AgoraCallingActivity : BaseActivity(),OnClickListener {
 
         agoraEngine.setupRemoteVideo(VideoCanvas(remoteView, VideoCanvas.RENDER_MODE_FIT, uid))
 
+
     }
 
     private fun setupLocalVideo() {
