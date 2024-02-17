@@ -42,6 +42,7 @@ class JoinGroupParticipantsActivity : AppCompatActivity(), View.OnClickListener,
     private lateinit var binding: ActivityJoinGroupParticipantsBinding
     var groupName = ""
     var groupBanner = ""
+    var groupDescription=""
     private lateinit var groupRepository: GroupRepository
     private val parentJob = Job()
     private lateinit var dashboardRepository: DashboardRepository
@@ -87,6 +88,7 @@ class JoinGroupParticipantsActivity : AppCompatActivity(), View.OnClickListener,
 
         groupName = intent.getStringExtra(Extra.GROUP_NAME).toString()
         groupBanner = intent.getStringExtra(Extra.GROUP_BANNER).toString()
+        groupDescription= intent.getStringExtra("description").toString()
         addlistner()
         groupAdapter =GroupPartAdapter(this, arrayListOf(), this)
         binding.rvMember.adapter = groupAdapter
@@ -181,7 +183,11 @@ class JoinGroupParticipantsActivity : AppCompatActivity(), View.OnClickListener,
                         it.id?.let { it1 -> arrayID.add(it1) }
                     }
                 }
-                postCreateGroup()
+                if (arrayID.isEmpty()){
+                    Toast.makeText(this@JoinGroupParticipantsActivity, "Add at least One Member", Toast.LENGTH_SHORT).show()
+                }
+                else
+                    postCreateGroup()
             }
         }
     }

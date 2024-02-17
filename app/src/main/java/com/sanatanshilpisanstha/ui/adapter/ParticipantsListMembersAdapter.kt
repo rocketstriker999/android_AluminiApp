@@ -1,8 +1,10 @@
 package com.sanatanshilpisanstha.ui.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.sanatanshilpisanstha.R
@@ -31,8 +33,19 @@ class ParticipantsListMembersAdapter(
                 error(R.drawable.logo)
             }
 
-            binding.imgMessage.setOnClickListener {
+
+            binding.relativelayout.setOnClickListener {
                 data.id?.let { it1 -> onItemClickListener.onItemClick(it1) }
+            }
+
+            binding.imgMessage.setOnClickListener{
+
+                data.id?.let { it1 -> data.name?.let { it2 ->
+                    onItemClickListener.onimgMessageClick(it1,
+                        it2
+                    )
+                } }
+
             }
 
         }

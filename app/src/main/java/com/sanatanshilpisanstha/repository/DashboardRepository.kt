@@ -322,6 +322,7 @@ class DashboardRepository(val context: Context) {
 
             if (response != null && response.isSuccessful) {
                 response.body()?.asJsonObject?.let { jsonObject ->
+                    Log.d("run", response.body().toString())
                     val apiResponse: APIResponse =
                         Gson().fromJson(jsonObject, object : TypeToken<APIResponse>() {}.type)
 
@@ -1185,6 +1186,7 @@ class DashboardRepository(val context: Context) {
     suspend fun getAgoraToken(
         userid: String,
         callAction: String,
+        groupid:String,
         listener: (APIResult<JsonObject>) -> Unit
     ) {
         if (Utilities.isNetworkAvailable(context)) {
@@ -1192,8 +1194,8 @@ class DashboardRepository(val context: Context) {
 
             val jsonObject = JsonObject()
             jsonObject.addProperty("call_type", "chat")
-            jsonObject.addProperty("chat_user_id", userid.toString())
-            jsonObject.addProperty("group_id", "")
+            jsonObject.addProperty("chat_user_id", userid)
+            jsonObject.addProperty("group_id", groupid)
             jsonObject.addProperty("call_action", callAction)
 
 
@@ -1217,17 +1219,21 @@ class DashboardRepository(val context: Context) {
                                 if (jsonObject.get("success").asBoolean) {
 
                                     if (jsonObject.has("data") && !jsonObject.get("data").isJsonNull) {
-
+                                        Log.d("jsondata", jsonObject.get("data").toString())
 
                                     }
                                     var msg = ""
                                     if (jsonObject.has("message") && !jsonObject.get("message").isJsonNull) {
                                         msg = jsonObject.get("message").asString
+
+
+                                        Log.d("token11", msg)
                                     }
 
                                     listener(
                                         APIResult.Success(
                                             jsonObject, msg
+
                                         )
                                     )
 

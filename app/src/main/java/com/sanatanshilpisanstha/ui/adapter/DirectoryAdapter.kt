@@ -1,8 +1,10 @@
 package com.sanatanshilpisanstha.ui.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.sanatanshilpisanstha.R
@@ -29,7 +31,7 @@ class DirectoryAdapter(
             }
 
             binding.conLayoutDirectoryTabItem.setOnClickListener {
-                itemClick.itemClick(data.id.toString(),data.name.toString())
+                itemClick.itemClick(data.id.toString(),data.name.toString(),data.profile.toString())
             }
         }
     }
@@ -53,7 +55,7 @@ class DirectoryAdapter(
     }
 
     interface ItemClick {
-        fun itemClick(id: String,username: String)
+        fun itemClick(id: String,username: String,profilepic:String)
     }
 
     fun updateList(sirenList: ArrayList<Directory>) {

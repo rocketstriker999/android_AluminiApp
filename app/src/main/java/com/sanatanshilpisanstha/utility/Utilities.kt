@@ -297,6 +297,24 @@ object Utilities {
             Log.e(TAG, "encodeAudio: " + e.message)
         }
         return encodeString
+    } fun encodeVideo(selectedPath: String): String {
+        var encodeString: String = ""
+        try {
+
+            // Just to check file size.. Its is correct i-e; Not Zero
+            val videoFile = File(selectedPath)
+            val fis = FileInputStream(videoFile)
+            val videoBytes = ByteArrayOutputStream()
+            val _video=videoBytes.toByteArray()
+            val buf = ByteArray(1024)
+            var n: Int
+            while (-1 != fis.read(buf).also { n = it }) videoBytes.write(buf, 0, n)
+            val _videoBase64 = Base64.encodeToString(_video, Base64.DEFAULT)
+            val encodeString = _videoBase64
+        } catch (e: java.lang.Exception) {
+            Log.e(TAG, "encodeAudio: " + e.message)
+        }
+        return encodeString
     }
 
     fun encodeDoc(selectedPath: String): String {

@@ -1,13 +1,16 @@
 package com.sanatanshilpisanstha.ui.adapter
 
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.updateLayoutParams
@@ -20,12 +23,11 @@ import com.sanatanshilpisanstha.data.entity.group.message.MMessage
 import com.sanatanshilpisanstha.data.enum.MessageCode
 import com.sanatanshilpisanstha.databinding.UnitChatDateBinding
 import com.sanatanshilpisanstha.databinding.UnitChatMsgBinding
+import com.sanatanshilpisanstha.ui.ShowImageVideo
 import com.sanatanshilpisanstha.ui.group.LikesCommentActivity
 import com.sanatanshilpisanstha.utility.Constant
 import com.sanatanshilpisanstha.utility.Constant.MessageId
 import com.sanatanshilpisanstha.utility.Utilities
-import java.lang.String
-import java.util.Locale
 
 
 class MessageAdapter(
@@ -53,6 +55,7 @@ class MessageAdapter(
             ChatListItem.TYPE_GENERAL -> {
                 if (holder is MessagVh) {
                     holder.setData(message = messageList[position] as MMessage,position)
+                    Log.d("data", messageList[position].toString())
                 }
             }
             ChatListItem.TYPE_DATE -> {
@@ -70,6 +73,7 @@ class MessageAdapter(
 
     fun updateList(messageList: ArrayList<ChatListItem>) {
         this.messageList = messageList
+        Log.d("message", this.messageList.toString())
         notifyDataSetChanged()
     }
 
@@ -394,8 +398,8 @@ class MessageAdapter(
     private fun setText(binding: UnitChatMsgBinding, mMessage: MMessage) {
         val message = mMessage.mText!!
 
-        binding.tvMTextBy.text = message.username
-        binding.tvMTextTittle.text = message.message
+        binding.tvMTextBy2.text = message.username
+        binding.tvMTextTittle2.text = message.message
 
         binding.tvMTextTime.text =  Utilities.formatDate(
             "" + Constant.SERVER_DATE_FORMAT,
@@ -433,6 +437,11 @@ class MessageAdapter(
                  crossfade(true)
                 placeholder(R.drawable.logo)
                 error(R.drawable.logo)
+            }
+            binding.ivMDocument.setOnClickListener {
+              val intent=Intent(it.context,ShowImageVideo::class.java)
+                intent.putExtra("image",message.file)
+                it.context.startActivity(intent)
             }
         } else {
             binding.ivMJobBanner.visibility = View.GONE

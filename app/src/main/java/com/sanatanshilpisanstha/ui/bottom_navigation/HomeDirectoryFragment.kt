@@ -191,11 +191,12 @@ class HomeDirectoryFragment : Fragment(), DirectoryAdapter.ItemClick {
         _binding = null
     }
 
-    override fun itemClick(id: String, username: String) {
+    override fun itemClick(id: String, username: String,profilepic:String) {
         val intent = Intent(context, DirectoryChatActivity::class.java)
         intent.putExtra("userId", id)
         intent.putExtra(Extra.GROUP_ID, id)
         intent.putExtra(Extra.DIRECTORY_USER_NAME, username)
+        intent.putExtra("profilepic",profilepic)
         context?.startActivity(intent)
     }
 

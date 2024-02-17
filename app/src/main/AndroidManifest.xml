@@ -152,6 +152,8 @@
         <activity
             android:name=".ui.directory.DirectoryChatActivity"
             android:exported="false" />
+        <activity android:name=".ui.ShowImageVideo"
+            android:exported="false"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"
