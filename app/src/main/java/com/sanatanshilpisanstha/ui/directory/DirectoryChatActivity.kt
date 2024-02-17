@@ -52,6 +52,7 @@ import com.sanatanshilpisanstha.repository.GroupRepository
 import com.sanatanshilpisanstha.ui.BaseActivity
 import com.sanatanshilpisanstha.ui.adapter.ContactAdapter
 import com.sanatanshilpisanstha.ui.adapter.DirectoryChatAdapter
+import com.sanatanshilpisanstha.ui.connect.ContactInfoActivity
 import com.sanatanshilpisanstha.ui.group.GroupBottomDialogFragment
 import com.sanatanshilpisanstha.utility.*
 import kotlinx.coroutines.CoroutineScope
@@ -83,6 +84,7 @@ class DirectoryChatActivity : BaseActivity(), GroupBottomDialogFragment.ItemClic
     private val scope = CoroutineScope(coroutineContext)
     var groupName = ""
     var groupBanner = ""
+    var profilepic=""
     private lateinit var groupRepository: GroupRepository
 
     var alertDialog: AlertDialog? = null
@@ -114,11 +116,14 @@ class DirectoryChatActivity : BaseActivity(), GroupBottomDialogFragment.ItemClic
         val intent = intent
         groupId = intent.getStringExtra(Extra.GROUP_ID)?.toInt() ?: 0
         groupName = intent.getStringExtra(Extra.DIRECTORY_USER_NAME).toString()
-        groupBanner = intent.getStringExtra(Extra.GROUP_BANNER).toString()
+       // groupBanner = intent.getStringExtra(Extra.GROUP_BANNER).toString()
+        profilepic= intent.getStringExtra("profilepic").toString()
         binding.tvPersonName.text = "" + groupName
 
-        if (Utilities.IsValidUrl(groupBanner.toString())) {
-            binding.ivProfile.load(groupBanner) {
+
+
+        if (Utilities.IsValidUrl(profilepic.toString())) {
+            binding.ivProfile.load(profilepic) {
                 crossfade(true)
                 placeholder(R.drawable.logo)
                 error(R.drawable.logo)
@@ -129,6 +134,13 @@ class DirectoryChatActivity : BaseActivity(), GroupBottomDialogFragment.ItemClic
                 placeholder(R.drawable.logo)
                 error(R.drawable.logo)
             }
+        }
+
+        binding.tvPersonName.setOnClickListener {
+                val i = Intent(this, ContactInfoActivity::class.java)
+                i.putExtra(Extra.USER_ID, groupId)
+                startActivity(i)
+
         }
 
 
@@ -644,7 +656,7 @@ class DirectoryChatActivity : BaseActivity(), GroupBottomDialogFragment.ItemClic
                     Log.e("files==", uri.toString())
                     val filePath: String =
                         FileUtils.getFilePathForURI(this, uri)!!
-                    postMessageForOneTwoOne("" + Utilities.encodeAudio(filePath), "mp4", "2")
+                    postMessageForOneTwoOne("" + Utilities.encodeVideo(filePath), "mp4", "2")
                 }
             }
             Constant.SELECT_PHONE_NUMBER -> {
@@ -713,11 +725,11 @@ class DirectoryChatActivity : BaseActivity(), GroupBottomDialogFragment.ItemClic
             }
 
             binding.videoCallRelative -> {
-                Log.e("groupId====>",groupId.toString());
+                Log.e("groupId====>",groupId.toString())
                 val intent = Intent(this, AgoraCallingActivity::class.java)
                 intent.putExtra("fromChatScreen", true)
                 intent.putExtra("FromNotification","false")
-                intent.putExtra(Extra.GROUP_ID,groupId.toString())
+                intent.putExtra("chatID",groupId.toString())
                 startActivity(intent)
             }
         }
@@ -763,6 +775,7 @@ class DirectoryChatActivity : BaseActivity(), GroupBottomDialogFragment.ItemClic
                 "" + message,
                 "" + ext,
                 "" + type,
+
             ) {
                 when (it) {
                     is APIResult.Success -> {
@@ -784,6 +797,7 @@ class DirectoryChatActivity : BaseActivity(), GroupBottomDialogFragment.ItemClic
                     }
                 }
             }
+            Log.d("link", ""+message)
         }
     }
 

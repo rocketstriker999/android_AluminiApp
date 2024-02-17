@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +21,7 @@ import com.sanatanshilpisanstha.data.entity.group.message.MMessage
 import com.sanatanshilpisanstha.data.enum.MessageCode
 import com.sanatanshilpisanstha.databinding.UnitChatDateBinding
 import com.sanatanshilpisanstha.databinding.UnitChatMsgBinding
+import com.sanatanshilpisanstha.ui.ShowImageVideo
 import com.sanatanshilpisanstha.ui.group.LikesCommentActivity
 import com.sanatanshilpisanstha.utility.Constant
 import com.sanatanshilpisanstha.utility.Constant.MessageId
@@ -129,6 +131,8 @@ class DirectoryChatAdapter(
                     }
                 }
             }
+
+
 
 
             setAlignment(binding, message)
@@ -447,6 +451,11 @@ class DirectoryChatAdapter(
                  crossfade(true)
                 placeholder(R.drawable.logo)
                 error(R.drawable.logo)
+                binding.cvMDocument.setOnClickListener{
+                    val intent=Intent(it.context, ShowImageVideo::class.java)
+                    intent.putExtra("image",message.file)
+                    it.context.startActivity(intent)
+                }
             }
         } else {
             binding.ivMJobBanner.visibility = View.GONE

@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
+import coil.load
+import com.sanatanshilpisanstha.R
 import com.sanatanshilpisanstha.data.entity.ProfileModel
 import com.sanatanshilpisanstha.data.local.PreferenceManager
 import com.sanatanshilpisanstha.databinding.ActivityContactInfoBinding
@@ -108,6 +110,6 @@ class ContactInfoActivity : BaseActivity(), View.OnClickListener {
         binding.txtPinCode.text = profileModel.data?.pincode
         binding.txtLinkedinProfile.text = profileModel.data?.linkedinURL
         binding.txtBatch.text = profileModel.data?.graduationYear
-
+        binding.ivGroup.load(profileModel.data?.profilePic)
     }
 }

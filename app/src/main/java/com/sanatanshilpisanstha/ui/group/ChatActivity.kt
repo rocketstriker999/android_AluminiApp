@@ -59,6 +59,7 @@ import kotlinx.coroutines.launch
 import java.io.File
 import java.io.IOException
 import kotlin.coroutines.CoroutineContext
+import kotlin.math.log
 
 
 class ChatActivity : AppCompatActivity(), GroupBottomDialogFragment.ItemClickListener,
@@ -113,7 +114,7 @@ class ChatActivity : AppCompatActivity(), GroupBottomDialogFragment.ItemClickLis
         groupBanner = intent.getStringExtra(Extra.GROUP_BANNER).toString()
         binding.tvPersonName.text = "" + groupName
 
-        binding.audioVideoLinear.visibility= View.GONE
+       // binding.audioVideoLinear.visibility= View.GONE
 
         if(Utilities.IsValidUrl(groupBanner.toString())){
             binding.ivProfile.load(groupBanner) {
@@ -390,6 +391,8 @@ class ChatActivity : AppCompatActivity(), GroupBottomDialogFragment.ItemClickLis
                     Log.e("files==", uri.toString())
                     val filePath: String =
                         FileUtils.getFilePathForURI(this, uri)!!
+                    Log.d("path",filePath)
+                    Log.d("path",Utilities.encodeAudio(filePath))
                     postMessage("" + Utilities.encodeAudio(filePath), "mp4", "2")
                 }
             }
@@ -598,6 +601,7 @@ class ChatActivity : AppCompatActivity(), GroupBottomDialogFragment.ItemClickLis
                         is APIResult.Failure -> {
                             pd.cancel()
                             Utilities.showErrorSnackBar(binding.cvRoot, it.message.toString())
+                            Log.e("error", it.message.toString() )
                         }
 
                         APIResult.InProgress -> {
@@ -788,6 +792,7 @@ class ChatActivity : AppCompatActivity(), GroupBottomDialogFragment.ItemClickLis
             contactModel.setNumbers(phoneNumber)
             contactModelArrayList!!.add(contactModel)
             Log.d("name>>", name + "  " + phoneNumber)
+
 
         }
         phones.close()

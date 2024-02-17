@@ -101,9 +101,16 @@ class AgoraCallingActivity : BaseActivity(),OnClickListener {
                 initAgoraEngineAndJoinChannel()
                 Log.e("initAgora=====>",intent.getStringExtra("FromNotification").toString())
             } else {
-                uid = intent.getStringExtra(Extra.GROUP_ID)?.toInt() ?: 0
-                getToken(uid.toString())
-                Log.e("GROUP_ID=====>",intent.getStringExtra(Extra.GROUP_ID).toString())
+                if (intent.getStringExtra("chatID").toString().isNullOrBlank()) {
+                    uid = intent.getStringExtra("chatID")?.toInt() ?: 0
+                    getToken(uid.toString(),"")
+                    Log.e("GROUP_ID=====>", intent.getStringExtra(Extra.GROUP_ID).toString())
+                }
+                else {
+                    uid = intent.getStringExtra(Extra.GROUP_ID)?.toInt() ?: 0
+                    getToken("",uid.toString())
+                    Log.e("GROUP_ID=====>", intent.getStringExtra(Extra.GROUP_ID).toString())
+                }
 
             }
         }
@@ -287,10 +294,10 @@ class AgoraCallingActivity : BaseActivity(),OnClickListener {
         }.start()
     }
 
-    fun getToken(userId: String) {
+    fun getToken(userId: String,groupID:String) {
 
         scope.launch {
-            dashboardRepository.getAgoraToken(userId,"video") {
+            dashboardRepository.getAgoraToken(userId,groupID,"video") {
                 when (it) {
                     is APIResult.Success -> {
                         token = it.data.getAsJsonObject("data").get("agora_token").toString()

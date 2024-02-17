@@ -90,8 +90,8 @@
                     android:layout_height="@dimen/_20sdp"
                     android:layout_centerInParent="true"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    app:tint="@color/black"
-                    android:src="@drawable/baseline_call_24" />
+                    android:src="@drawable/baseline_call_24"
+                    app:tint="@color/black" />
             </RelativeLayout>
 
             <RelativeLayout

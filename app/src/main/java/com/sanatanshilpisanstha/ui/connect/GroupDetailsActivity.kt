@@ -82,6 +82,7 @@ class GroupDetailsActivity : BaseActivity() , onItemClickListener {
                 when (it) {
                     is APIResult.Success -> {
                         memberList = it.data
+                        binding.txtParticipateCount.text=memberList.size.toString()
                         setAdepter()
                         dismissDialog()
                     }

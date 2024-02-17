@@ -783,6 +783,7 @@ class FillProfileActivity : AppCompatActivity(), OnClickListener,
                         Utilities.showErrorSnackBar(binding.cvRoot, it.message.toString())
                         binding.progressBar.visibility = View.GONE
                         binding.btnSave.text = resources.getString(R.string.submit)
+
                     }
 
                     is APIResult.Failure -> {
@@ -899,7 +900,7 @@ class FillProfileActivity : AppCompatActivity(), OnClickListener,
                     is APIResult.Success -> {
                         Utilities.showErrorSnackBar(binding.cvRoot, it.message.toString())
                         binding.progressBar.visibility = View.GONE
-
+                        binding.btnSave.text = resources.getString(R.string.submit)
                         setUserData(it.data);
 
                     }

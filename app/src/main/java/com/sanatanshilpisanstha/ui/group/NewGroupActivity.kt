@@ -61,6 +61,22 @@ class NewGroupActivity : AppCompatActivity(), View.OnClickListener {
 
             }
         })
+        binding.editTextGroupdescription.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int
+            ) {
+            }
+
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
+                binding.textView17.text = s.length.toString() + "/100 Character"
+
+            }
+        })
 
     }
 
@@ -72,8 +88,11 @@ class NewGroupActivity : AppCompatActivity(), View.OnClickListener {
             binding.button -> {
                 if (binding.editTextTextPersonName3.text.toString().trim().isEmpty()) {
                     Toast.makeText(this, "Group name is required", Toast.LENGTH_SHORT).show()
-                } else if (image64.isEmpty()) {
-                    Toast.makeText(this, "Group image is required", Toast.LENGTH_SHORT).show()
+//                } else if (image64.isEmpty()) {
+//                    Toast.makeText(this, "Group image is required", Toast.LENGTH_SHORT).show()
+
+                }else if (binding.editTextGroupdescription.text.toString().trim().isEmpty()) {
+                   Toast.makeText(this, "Group Description is required", Toast.LENGTH_SHORT).show()
 
                 } else {
                     val intent = Intent(this, JoinGroupParticipantsActivity::class.java)
@@ -81,6 +100,7 @@ class NewGroupActivity : AppCompatActivity(), View.OnClickListener {
                         GROUP_NAME,
                         "" + binding.editTextTextPersonName3.text.toString().trim()
                     )
+                    intent.putExtra("description",binding.editTextGroupdescription.text.toString().trim())
                     intent.putExtra(GROUP_BANNER, "" + image64)
                     this.startActivity(intent)
                 }

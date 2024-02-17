@@ -3,6 +3,7 @@ package com.sanatanshilpisanstha.ui
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatDelegate
 import coil.load
@@ -52,6 +53,12 @@ class WebPageActivity : AppCompatActivity() {
 
         // if you want to enable zoom feature
         binding.webView.settings.setSupportZoom(true)
+
+        binding.webView.webViewClient = object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+              return true
+            }
+        }
     }
 
     // if you press Back button this code will work
