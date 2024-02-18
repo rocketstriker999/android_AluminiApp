@@ -169,11 +169,7 @@ class AgoraCallingActivity : BaseActivity(),OnClickListener {
             showMessage("Remote user offline $uid $reason")
         }
 
-        override fun onWarning(warn: Int) {
-            super.onWarning(warn)
-            Log.e("onWarning=====>",warn.toString());
 
-        }
 
         override fun onError(err: Int) {
             super.onError(err)
@@ -304,14 +300,14 @@ class AgoraCallingActivity : BaseActivity(),OnClickListener {
         }.start()
     }
 
-    fun getToken(userId: String,groupID:String) {
+    private fun getToken(userId: String,groupID:String) {
 
         scope.launch {
             dashboardRepository.getAgoraToken(userId,"video",groupID) {
                 when (it) {
                     is APIResult.Success -> {
-                        token = it.data.getAsJsonObject("data").get("agora_token").toString()
-                        channelName = it.data.getAsJsonObject("data").get("channel_name").toString()
+                        token = it.data.getAsJsonObject("data").get("agora_token").asString
+                        channelName = it.data.getAsJsonObject("data").get("channel_name").asString
                         Log.e("token",token)
                         Log.e("channelName",channelName)
                         initAgoraEngineAndJoinChannel()
