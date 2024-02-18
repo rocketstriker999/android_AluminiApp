@@ -48,7 +48,6 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
     private var agoraEngine: RtcEngine? = null // The RTCEngine instance
     private val appId = "533b062a6fbf45d08e16dc9629afe517"
 
-    private var remoteUids = HashSet<Int>() // An object to store uids of remote users
     private var isJoined = false // Status of the video call
 
     private var mEndCall = false
@@ -66,7 +65,7 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
             // Listen for a remote user joining the channel.
             override fun onUserJoined(uid: Int, elapsed: Int) {
                 sendMessage("Remote user joined $uid")
-                remoteUids.add(uid)
+                isJoined = true
                 runOnUiThread { setupRemoteVideo(uid) }
 
             }
@@ -79,8 +78,6 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
 
             override fun onUserOffline(uid: Int, reason: Int) {
                 sendMessage("Remote user offline $uid $reason")
-                remoteUids.remove(uid)
-
             }
 
             override fun onError(err: Int) {
@@ -122,20 +119,20 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
     private fun retrieveValue() {
         if (intent.extras != null) {
             if (intent.getBooleanExtra("FromNotification", false)) {
+
+                println("PERSON ID "+preferenceManager.personID.toString())
+
                 joinChannel(
                     intent.getStringExtra("channel_name").toString(),
                     intent.getStringExtra("agora_token").toString(),
                     preferenceManager.personID.toString(),
                     false
                 )
-                Log.e("initAgoraFrom Notification=====>", " Incoming Call")
             } else {
                 if (!intent.getStringExtra("chatID").toString().isBlank()) {
                     intent.getStringExtra("chatID")?.let { getToken(it, "") }
-                    Log.e("CALLING GROUP=====>", "Single Call")
                 } else {
                     intent.getStringExtra(Extra.GROUP_ID)?.let { getToken("", it) }
-                    Log.e("CALLING GROUP=====>", "Group Call")
                 }
             }
         }
@@ -174,24 +171,15 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
             config.mAppId = appId
             config.mEventHandler = iRtcEngineEventHandler
             agoraEngine = RtcEngine.create(config)
-            setupVideoProfile()
+            agoraEngine!!.enableVideo()
+
         } catch (e: Exception) {
             e.printStackTrace()
             sendMessage(e.toString())
         }
     }
 
-    private fun setupVideoProfile() {
-        agoraEngine!!.enableVideo()
-        agoraEngine!!.setVideoEncoderConfiguration(
-            VideoEncoderConfiguration(
-                VideoEncoderConfiguration.VD_640x360,
-                VideoEncoderConfiguration.FRAME_RATE.FRAME_RATE_FPS_15,
-                VideoEncoderConfiguration.STANDARD_BITRATE,
-                VideoEncoderConfiguration.ORIENTATION_MODE.ORIENTATION_MODE_FIXED_PORTRAIT
-            )
-        )
-    }
+
 
 
     private fun setupLocalVideo(localUserId: Int) {
@@ -308,6 +296,8 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
             dashboardRepository.getAgoraToken(userId, "video", groupID) {
                 when (it) {
                     is APIResult.Success -> {
+
+                        Log.d("CALLED","CALLING FROM "+preferenceManager.personID+"CALLING To "+userId)
                         joinChannel(
                             it.data.getAsJsonObject("data").get("channel_name").asString,
                             it.data.getAsJsonObject("data").get("agora_token").asString,

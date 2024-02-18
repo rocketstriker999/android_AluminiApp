@@ -53,6 +53,8 @@ class IncomingCallScreen : AppCompatActivity() {
             val incomingCallIntent = Intent(applicationContext, AgoraCallingActivity::class.java)
             incomingCallIntent.putExtra("agora_token", agoraToken)
             incomingCallIntent.putExtra("channel_name", ChannelName)
+
+
             incomingCallIntent.putExtra("FromNotification", true)
             incomingCallIntent.addFlags(
                 Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
@@ -66,11 +68,11 @@ class IncomingCallScreen : AppCompatActivity() {
         }
 
 
-        binding.inComingCallDenied.setOnClickListener(View.OnClickListener {
+        binding.inComingCallDenied.setOnClickListener {
             mediaPlayer?.stop()
             finish()
 
-        })
+        }
     }
 
     override fun onDestroy() {
