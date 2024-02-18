@@ -53,6 +53,8 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
     private var mMuted = false
     private var localView: SurfaceView? = null
 
+    private var remoteView: SurfaceView? = null
+
     private lateinit var dashboardRepository: DashboardRepository
     private val coroutineContext: CoroutineContext get() = Job() + Dispatchers.Main
     private val scope = CoroutineScope(coroutineContext)
@@ -183,23 +185,37 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
 
 
     private fun setupLocalVideo(localUserId: Int) {
-        val localSurfaceView = SurfaceView(this)
+        /*val localSurfaceView = SurfaceView(this)
         localSurfaceView.visibility = VISIBLE
         agoraEngine!!.setupLocalVideo(
             VideoCanvas(
                 localSurfaceView, VideoCanvas.RENDER_MODE_FIT, localUserId
             )
-        )
+        )*/
+
+        localView = RtcEngine.CreateRendererView(baseContext)
+        localView!!.setZOrderMediaOverlay(true)
+        binding.localVideoView.addView(localView)
+        agoraEngine!!.setupLocalVideo(VideoCanvas(localView, VideoCanvas.RENDER_MODE_FIT, localUserId))
     }
 
 
 
     private fun setupRemoteVideo(remoteUid: Int) {
-        val remoteSurfaceView = SurfaceView(this)
+        /*val remoteSurfaceView = SurfaceView(this)
         remoteSurfaceView.setZOrderMediaOverlay(true)
         val videoCanvas = VideoCanvas(remoteSurfaceView, VideoCanvas.RENDER_MODE_FIT, remoteUid)
         agoraEngine!!.setupRemoteVideo(videoCanvas)
-        remoteSurfaceView.visibility = VISIBLE
+        remoteSurfaceView.visibility = VISIBLE*/
+
+
+        if (binding.remoteVideoView.childCount > 1) {
+            return
+        }
+        remoteView = RtcEngine.CreateRendererView(baseContext)
+        binding.remoteVideoView.addView(remoteView)
+
+        agoraEngine!!.setupRemoteVideo(VideoCanvas(remoteView, VideoCanvas.RENDER_MODE_FIT, remoteUid))
     }
 
     private fun checkSelfPermission(): Boolean {
