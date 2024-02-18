@@ -198,38 +198,22 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
 
         val localSurfaceView = SurfaceView(this)
         localSurfaceView.setZOrderMediaOverlay(true)
-
-        agoraEngine!!.setupLocalVideo(VideoCanvas(localSurfaceView, VideoCanvas.RENDER_MODE_HIDDEN, localUserId))
         binding.localVideoView.addView(localSurfaceView)
-        println("CALLED")
-
+        agoraEngine!!.setupLocalVideo(VideoCanvas(localSurfaceView, VideoCanvas.RENDER_MODE_HIDDEN, localUserId))
     }
-
-
-
-
-   /* private fun setupRemoteVideo(remoteUid: Int) {
-
-        val remoteSurfaceView = SurfaceView(this)
-        remoteSurfaceView.setZOrderMediaOverlay(true)
-        val videoCanvas = VideoCanvas(remoteSurfaceView, VideoCanvas.RENDER_MODE_FIT, remoteUid)
-        binding.remoteVideoView.addView(remoteSurfaceView)
-        agoraEngine!!.setupRemoteVideo(videoCanvas)
-    }*/
 
 
     private fun setupRemoteVideo(remoteUid: Int) {
         // Create a new SurfaceView
-        val remoteSurfaceView = SurfaceView(applicationContext)
-        remoteSurfaceView.setZOrderMediaOverlay(true)
+        val remoteSurfaceView = SurfaceView(this)
         // Create a VideoCanvas using the remoteSurfaceView
         val videoCanvas = VideoCanvas(
             remoteSurfaceView,
             VideoCanvas.RENDER_MODE_FIT, remoteUid
         )
+        binding.remoteVideoView.addView(remoteSurfaceView)
         agoraEngine!!.setupRemoteVideo(videoCanvas)
 
-        binding.remoteVideoView.addView(remoteSurfaceView)
 
 
     }
