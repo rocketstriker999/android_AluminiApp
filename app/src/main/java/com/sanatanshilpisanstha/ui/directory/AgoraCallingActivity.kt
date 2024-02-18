@@ -6,11 +6,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.SurfaceView
 import android.view.View
+import android.view.View.INVISIBLE
 import android.view.View.OnClickListener
 import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.sanatanshilpisanstha.R
 import com.sanatanshilpisanstha.data.local.PreferenceManager
 import com.sanatanshilpisanstha.databinding.ActivityVideoCallingBinding
 import com.sanatanshilpisanstha.remote.APIResult
@@ -121,7 +123,8 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
                 joinChannel(
                     intent.getStringExtra("channel_name").toString(),
                     intent.getStringExtra("agora_token").toString(),
-                    preferenceManager.personID.toString(),false
+                    preferenceManager.personID.toString(),
+                    false
                 )
                 Log.e("initAgoraFrom Notification=====>", " Incoming Call")
             } else {
@@ -137,7 +140,12 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
     }
 
 
-    private fun joinChannel(channelName: String, token: String?, userId: String, isBroadCaster:Boolean) {
+    private fun joinChannel(
+        channelName: String,
+        token: String?,
+        userId: String,
+        isBroadCaster: Boolean
+    ) {
         // Ensure that necessary Android permissions have been granted
         if (!checkSelfPermission()) {
             sendMessage("Permissions were not granted")
@@ -147,9 +155,9 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
         val options = ChannelMediaOptions()
         options.channelProfile = Constants.CHANNEL_PROFILE_COMMUNICATION
 
-        if(isBroadCaster){
+        if (isBroadCaster) {
             options.clientRoleType = Constants.CLIENT_ROLE_BROADCASTER
-        }else{
+        } else {
             options.clientRoleType = Constants.CLIENT_ROLE_AUDIENCE
         }
 
@@ -184,8 +192,7 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
     }
 
 
-    private fun setupLocalVideo(localUserId: Int) {
-        /*val localSurfaceView = SurfaceView(this)
+    private fun setupLocalVideo(localUserId: Int) {/*val localSurfaceView = SurfaceView(this)
         localSurfaceView.visibility = VISIBLE
         agoraEngine!!.setupLocalVideo(
             VideoCanvas(
@@ -196,13 +203,17 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
         localView = RtcEngine.CreateRendererView(baseContext)
         localView!!.setZOrderMediaOverlay(true)
         binding.localVideoView.addView(localView)
-        agoraEngine!!.setupLocalVideo(VideoCanvas(localView, VideoCanvas.RENDER_MODE_FIT, localUserId))
+        agoraEngine!!.setupLocalVideo(
+            VideoCanvas(
+                localView,
+                VideoCanvas.RENDER_MODE_FIT,
+                localUserId
+            )
+        )
     }
 
 
-
-    private fun setupRemoteVideo(remoteUid: Int) {
-        /*val remoteSurfaceView = SurfaceView(this)
+    private fun setupRemoteVideo(remoteUid: Int) {/*val remoteSurfaceView = SurfaceView(this)
         remoteSurfaceView.setZOrderMediaOverlay(true)
         val videoCanvas = VideoCanvas(remoteSurfaceView, VideoCanvas.RENDER_MODE_FIT, remoteUid)
         agoraEngine!!.setupRemoteVideo(videoCanvas)
@@ -215,7 +226,13 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
         remoteView = RtcEngine.CreateRendererView(baseContext)
         binding.remoteVideoView.addView(remoteView)
 
-        agoraEngine!!.setupRemoteVideo(VideoCanvas(remoteView, VideoCanvas.RENDER_MODE_FIT, remoteUid))
+        agoraEngine!!.setupRemoteVideo(
+            VideoCanvas(
+                remoteView,
+                VideoCanvas.RENDER_MODE_FIT,
+                remoteUid
+            )
+        )
     }
 
     private fun checkSelfPermission(): Boolean {
@@ -236,11 +253,43 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
         }
     }
 
-    override fun onClick(v: View?) {/*
+    private fun endCall() {
+        removeLocalVideo()
+        removeRemoteVideo()
+        leaveChannel()
+    }
+
+    fun leaveChannel() {
+        if (isJoined) {
+            agoraEngine!!.leaveChannel()
+            sendMessage("You left the channel")
+        }
+
+        onBackPressed()
+
+    }
+
+    private fun removeLocalVideo() {
+        if (localView != null) {
+            binding.localVideoView.removeView(localView)
+        }
+        localView = null
+    }
+
+    private fun removeRemoteVideo() {
+        if (remoteView != null) {
+            binding.remoteVideoView.removeView(remoteView)
+        }
+        remoteView = null
+    }
+
+
+
+    override fun onClick(v: View?) {
         when (v) {
             binding.buttonCall -> {
                 if (mEndCall) {
-                    startCall()
+                    //startCall()
                     mEndCall = false
                     binding.buttonCall.setImageResource(R.drawable.btn_endcall)
                     binding.buttonMute.visibility = VISIBLE
@@ -255,12 +304,12 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
             }
 
             binding.buttonSwitchCamera -> {
-                agoraEngine.switchCamera()
+                agoraEngine!!.switchCamera()
             }
 
             binding.buttonMute -> {
                 mMuted = !mMuted
-                agoraEngine.muteLocalAudioStream(mMuted)
+                agoraEngine!!.muteLocalAudioStream(mMuted)
                 val res: Int = if (mMuted) {
                     R.drawable.btn_mute
                 } else {
@@ -268,7 +317,7 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
                 }
                 binding.buttonMute.setImageResource(res)
             }
-        }*/
+        }
     }
 
 
