@@ -168,14 +168,10 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
             agoraEngine = RtcEngine.create(config)
             agoraEngine!!.enableVideo()
 
-            agoraEngine!!.setVideoEncoderConfiguration(
-                VideoEncoderConfiguration(
-                    VideoEncoderConfiguration.VD_1920x1080,
-                    VideoEncoderConfiguration.FRAME_RATE.FRAME_RATE_FPS_30,
-                    VideoEncoderConfiguration.STANDARD_BITRATE,
-                    VideoEncoderConfiguration.ORIENTATION_MODE.ORIENTATION_MODE_FIXED_PORTRAIT
-                )
-            )
+            agoraEngine!!.setVideoEncoderConfiguration(VideoEncoderConfiguration(VideoEncoderConfiguration.VD_640x360,
+                VideoEncoderConfiguration.FRAME_RATE.FRAME_RATE_FPS_15,
+                VideoEncoderConfiguration.STANDARD_BITRATE,
+                VideoEncoderConfiguration.ORIENTATION_MODE.ORIENTATION_MODE_FIXED_PORTRAIT))
 
         } catch (e: Exception) {
             e.printStackTrace()
