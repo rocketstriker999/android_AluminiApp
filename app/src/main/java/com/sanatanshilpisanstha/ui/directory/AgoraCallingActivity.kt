@@ -3,7 +3,6 @@ package com.sanatanshilpisanstha.ui.directory
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.SurfaceView
 import android.view.View
 import android.view.View.INVISIBLE
@@ -32,6 +31,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
+
 
 class AgoraCallingActivity : BaseActivity(), OnClickListener {
 
@@ -62,12 +62,12 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
 
     private val iRtcEngineEventHandler: IRtcEngineEventHandler
         get() = object : IRtcEngineEventHandler() {
+
             // Listen for a remote user joining the channel.
             override fun onUserJoined(uid: Int, elapsed: Int) {
                 isJoined = true
                 sendMessage("Remote user joined $uid")
                 runOnUiThread { setupRemoteVideo(uid) }
-
             }
 
             override fun onJoinChannelSuccess(channel: String, uid: Int, elapsed: Int) {
@@ -101,9 +101,6 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityVideoCallingBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
-
         binding.buttonCall.setOnClickListener(this)
         binding.buttonSwitchCamera.setOnClickListener(this)
         dashboardRepository = DashboardRepository(this)
@@ -147,7 +144,9 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
             sendMessage("Permissions were not granted")
             return
         }
-        if (agoraEngine == null) setupAgoraEngine()
+        if (agoraEngine == null) {
+            setupAgoraEngine()
+        }
         val options = ChannelMediaOptions()
         options.channelProfile = Constants.CHANNEL_PROFILE_COMMUNICATION
 
@@ -156,7 +155,6 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
         } else {
             options.clientRoleType = Constants.CLIENT_ROLE_AUDIENCE
         }
-
         agoraEngine!!.startPreview()
         agoraEngine!!.joinChannel(token, channelName, preferenceManager.personID, options)
     }
@@ -170,6 +168,15 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
             agoraEngine = RtcEngine.create(config)
             agoraEngine!!.enableVideo()
 
+            agoraEngine!!.setVideoEncoderConfiguration(
+                VideoEncoderConfiguration(
+                    VideoEncoderConfiguration.VD_1920x1080,
+                    VideoEncoderConfiguration.FRAME_RATE.FRAME_RATE_FPS_30,
+                    VideoEncoderConfiguration.STANDARD_BITRATE,
+                    VideoEncoderConfiguration.ORIENTATION_MODE.ORIENTATION_MODE_FIXED_PORTRAIT
+                )
+            )
+
         } catch (e: Exception) {
             e.printStackTrace()
             sendMessage(e.toString())
@@ -177,15 +184,18 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
     }
 
 
-
-
     private fun setupLocalVideo(localUserId: Int) {
         val localSurfaceView = SurfaceView(this)
         localSurfaceView.setZOrderMediaOverlay(true)
         binding.localVideoView.addView(localSurfaceView)
-        agoraEngine!!.setupLocalVideo(VideoCanvas(localSurfaceView, VideoCanvas.RENDER_MODE_FIT, localUserId))
+        agoraEngine!!.setupLocalVideo(
+            VideoCanvas(
+                localSurfaceView,
+                VideoCanvas.RENDER_MODE_FIT,
+                localUserId
+            )
+        )
     }
-
 
     private fun setupRemoteVideo(remoteUid: Int) {
         val remoteSurfaceView = SurfaceView(this)
@@ -229,8 +239,6 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
     }
 
 
-
-
     override fun onClick(v: View?) {
         when (v) {
             binding.buttonCall -> {
@@ -265,9 +273,6 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
             }
         }
     }
-
-
-
 
 
     private fun getToken(userId: String, groupID: String) {
