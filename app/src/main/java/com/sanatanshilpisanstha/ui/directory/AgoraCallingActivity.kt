@@ -67,18 +67,20 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
             override fun onUserJoined(uid: Int, elapsed: Int) {
                 sendMessage("Remote user joined $uid")
                 remoteUids.add(uid)
-                setupRemoteVideo(uid)
+                runOnUiThread { setupRemoteVideo(uid) }
+
             }
 
             override fun onJoinChannelSuccess(channel: String, uid: Int, elapsed: Int) {
                 isJoined = true
                 sendMessage("Joined Channel $channel")
-                setupLocalVideo(uid)
+                runOnUiThread { setupLocalVideo(uid) }
             }
 
             override fun onUserOffline(uid: Int, reason: Int) {
                 sendMessage("Remote user offline $uid $reason")
                 remoteUids.remove(uid)
+
             }
 
             override fun onError(err: Int) {
@@ -103,14 +105,16 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
         binding = ActivityVideoCallingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if (!checkSelfPermission()) {
-            ActivityCompat.requestPermissions(this, REQUESTED_PERMISSIONS, PERMISSION_REQ_ID)
-        }
+
 
         binding.buttonCall.setOnClickListener(this)
         binding.buttonSwitchCamera.setOnClickListener(this)
         dashboardRepository = DashboardRepository(this)
         preferenceManager = PreferenceManager(this)
+
+        if (!checkSelfPermission()) {
+            ActivityCompat.requestPermissions(this, REQUESTED_PERMISSIONS, PERMISSION_REQ_ID)
+        }
 
         retrieveValue()
     }
@@ -194,10 +198,14 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
 
         val localSurfaceView = SurfaceView(this)
         localSurfaceView.setZOrderMediaOverlay(true)
+
+        agoraEngine!!.setupLocalVideo(VideoCanvas(localSurfaceView, VideoCanvas.RENDER_MODE_HIDDEN, localUserId))
         binding.localVideoView.addView(localSurfaceView)
-        agoraEngine!!.setupLocalVideo(VideoCanvas(localSurfaceView, VideoCanvas.RENDER_MODE_FIT, localUserId))
+        println("CALLED")
 
     }
+
+
 
 
    /* private fun setupRemoteVideo(remoteUid: Int) {
@@ -238,7 +246,6 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
         requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        Log.e("requestCode====>", requestCode.toString() + "========>" + PERMISSION_REQ_ID)
         if (requestCode == PERMISSION_REQ_ID) {
             retrieveValue()
         }
