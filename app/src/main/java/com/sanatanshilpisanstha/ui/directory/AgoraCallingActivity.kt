@@ -195,27 +195,21 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
 
 
     private fun setupLocalVideo(localUserId: Int) {
-
         val localSurfaceView = SurfaceView(this)
         localSurfaceView.setZOrderMediaOverlay(true)
         binding.localVideoView.addView(localSurfaceView)
-        agoraEngine!!.setupLocalVideo(VideoCanvas(localSurfaceView, VideoCanvas.RENDER_MODE_HIDDEN, localUserId))
+        agoraEngine!!.setupLocalVideo(VideoCanvas(localSurfaceView, VideoCanvas.RENDER_MODE_FIT, localUserId))
     }
 
 
     private fun setupRemoteVideo(remoteUid: Int) {
-        // Create a new SurfaceView
         val remoteSurfaceView = SurfaceView(this)
-        // Create a VideoCanvas using the remoteSurfaceView
         val videoCanvas = VideoCanvas(
             remoteSurfaceView,
             VideoCanvas.RENDER_MODE_FIT, remoteUid
         )
         binding.remoteVideoView.addView(remoteSurfaceView)
         agoraEngine!!.setupRemoteVideo(videoCanvas)
-
-
-
     }
 
     private fun checkSelfPermission(): Boolean {
