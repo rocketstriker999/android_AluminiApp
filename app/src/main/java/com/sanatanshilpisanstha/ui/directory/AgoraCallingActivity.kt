@@ -64,8 +64,8 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
         get() = object : IRtcEngineEventHandler() {
             // Listen for a remote user joining the channel.
             override fun onUserJoined(uid: Int, elapsed: Int) {
-                sendMessage("Remote user joined $uid")
                 isJoined = true
+                sendMessage("Remote user joined $uid")
                 runOnUiThread { setupRemoteVideo(uid) }
 
             }
@@ -120,12 +120,9 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
         if (intent.extras != null) {
             if (intent.getBooleanExtra("FromNotification", false)) {
 
-                println("PERSON ID "+preferenceManager.personID.toString())
-
                 joinChannel(
                     intent.getStringExtra("channel_name").toString(),
                     intent.getStringExtra("agora_token").toString(),
-                    preferenceManager.personID.toString(),
                     false
                 )
             } else {
@@ -142,9 +139,9 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
     private fun joinChannel(
         channelName: String,
         token: String?,
-        userId: String,
         isBroadCaster: Boolean
     ) {
+
         // Ensure that necessary Android permissions have been granted
         if (!checkSelfPermission()) {
             sendMessage("Permissions were not granted")
@@ -161,7 +158,7 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
         }
 
         agoraEngine!!.startPreview()
-        agoraEngine!!.joinChannel(token, channelName, userId.toInt(), options)
+        agoraEngine!!.joinChannel(token, channelName, preferenceManager.personID, options)
     }
 
     private fun setupAgoraEngine() {
@@ -270,25 +267,8 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
     }
 
 
-    /* fun leaveChannel() {
-         if (!isJoined) {
-             // Do nothing
-         } else {
-             // Call the `leaveChannel` method
-             agoraEngine!!.leaveChannel()
 
-             // Set the `isJoined` status to false
-             isJoined = false
-             // Destroy the engine instance
-             destroyAgoraEngine()
-         }
-     }*/
 
-    private fun destroyAgoraEngine() {
-        // Release the RtcEngine instance to free up resources
-        RtcEngine.destroy()
-        agoraEngine = null
-    }
 
     private fun getToken(userId: String, groupID: String) {
 
@@ -297,11 +277,9 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
                 when (it) {
                     is APIResult.Success -> {
 
-                        Log.d("CALLED","CALLING FROM "+preferenceManager.personID+"CALLING To "+userId)
                         joinChannel(
                             it.data.getAsJsonObject("data").get("channel_name").asString,
                             it.data.getAsJsonObject("data").get("agora_token").asString,
-                            userId,
                             true
                         )
                     }
