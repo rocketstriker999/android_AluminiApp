@@ -283,8 +283,8 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
                 when (it) {
                     is APIResult.Success -> {
                         joinChannel(
-                            it.data.getAsJsonObject("data").get("channel_name").toString(),
-                            it.data.getAsJsonObject("data").get("agora_token").toString(),
+                            it.data.getAsJsonObject("data").get("channel_name").asString,
+                            it.data.getAsJsonObject("data").get("agora_token").asString,
                             userId,
                             true
                         )
