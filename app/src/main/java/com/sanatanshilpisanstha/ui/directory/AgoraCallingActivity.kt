@@ -53,9 +53,7 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
 
     private var mEndCall = false
     private var mMuted = false
-    private var localView: SurfaceView? = null
 
-    private var remoteView: SurfaceView? = null
 
     private lateinit var dashboardRepository: DashboardRepository
     private val coroutineContext: CoroutineContext get() = Job() + Dispatchers.Main
@@ -196,42 +194,36 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
 
         val localSurfaceView = SurfaceView(this)
         localSurfaceView.setZOrderMediaOverlay(true)
-        localSurfaceView.visibility = VISIBLE
-        agoraEngine!!.setupLocalVideo(
-            VideoCanvas(
-                localSurfaceView, VideoCanvas.RENDER_MODE_FIT, localUserId
-            )
-        )
-
         binding.localVideoView.addView(localSurfaceView)
-
-
+        agoraEngine!!.setupLocalVideo(VideoCanvas(localSurfaceView, VideoCanvas.RENDER_MODE_FIT, localUserId))
 
     }
 
 
-    private fun setupRemoteVideo(remoteUid: Int) {
+   /* private fun setupRemoteVideo(remoteUid: Int) {
 
         val remoteSurfaceView = SurfaceView(this)
         remoteSurfaceView.setZOrderMediaOverlay(true)
         val videoCanvas = VideoCanvas(remoteSurfaceView, VideoCanvas.RENDER_MODE_FIT, remoteUid)
+        binding.remoteVideoView.addView(remoteSurfaceView)
         agoraEngine!!.setupRemoteVideo(videoCanvas)
-        remoteSurfaceView.visibility = VISIBLE
+    }*/
 
 
-       /* if (binding.remoteVideoView.childCount > 1) {
-            return
-        }
-        remoteView = RtcEngine.CreateRendererView(baseContext)
-        binding.remoteVideoView.addView(remoteView)
+    private fun setupRemoteVideo(remoteUid: Int) {
+        // Create a new SurfaceView
+        val remoteSurfaceView = SurfaceView(applicationContext)
+        remoteSurfaceView.setZOrderMediaOverlay(true)
+        // Create a VideoCanvas using the remoteSurfaceView
+        val videoCanvas = VideoCanvas(
+            remoteSurfaceView,
+            VideoCanvas.RENDER_MODE_FIT, remoteUid
+        )
+        agoraEngine!!.setupRemoteVideo(videoCanvas)
 
-        agoraEngine!!.setupRemoteVideo(
-            VideoCanvas(
-                remoteView,
-                VideoCanvas.RENDER_MODE_FIT,
-                remoteUid
-            )
-        )*/
+        binding.remoteVideoView.addView(remoteSurfaceView)
+
+
     }
 
     private fun checkSelfPermission(): Boolean {
@@ -253,8 +245,6 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
     }
 
     private fun endCall() {
-        removeLocalVideo()
-        removeRemoteVideo()
         leaveChannel()
     }
 
@@ -268,19 +258,6 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
 
     }
 
-    private fun removeLocalVideo() {
-        if (localView != null) {
-            binding.localVideoView.removeView(localView)
-        }
-        localView = null
-    }
-
-    private fun removeRemoteVideo() {
-        if (remoteView != null) {
-            binding.remoteVideoView.removeView(remoteView)
-        }
-        remoteView = null
-    }
 
 
 
