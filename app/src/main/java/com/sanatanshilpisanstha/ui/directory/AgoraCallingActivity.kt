@@ -180,8 +180,8 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
     }
 
     private fun setupVideoProfile() {
-        agoraEngine?.enableVideo()
-        agoraEngine?.setVideoEncoderConfiguration(
+        agoraEngine!!.enableVideo()
+        agoraEngine!!.setVideoEncoderConfiguration(
             VideoEncoderConfiguration(
                 VideoEncoderConfiguration.VD_640x360,
                 VideoEncoderConfiguration.FRAME_RATE.FRAME_RATE_FPS_15,
@@ -192,35 +192,34 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
     }
 
 
-    private fun setupLocalVideo(localUserId: Int) {/*val localSurfaceView = SurfaceView(this)
+    private fun setupLocalVideo(localUserId: Int) {
+
+        val localSurfaceView = SurfaceView(this)
+        localSurfaceView.setZOrderMediaOverlay(true)
         localSurfaceView.visibility = VISIBLE
         agoraEngine!!.setupLocalVideo(
             VideoCanvas(
                 localSurfaceView, VideoCanvas.RENDER_MODE_FIT, localUserId
             )
-        )*/
-
-        localView = RtcEngine.CreateRendererView(baseContext)
-        localView!!.setZOrderMediaOverlay(true)
-        binding.localVideoView.addView(localView)
-        agoraEngine!!.setupLocalVideo(
-            VideoCanvas(
-                localView,
-                VideoCanvas.RENDER_MODE_FIT,
-                localUserId
-            )
         )
+
+        binding.localVideoView.addView(localSurfaceView)
+
+
+
     }
 
 
-    private fun setupRemoteVideo(remoteUid: Int) {/*val remoteSurfaceView = SurfaceView(this)
+    private fun setupRemoteVideo(remoteUid: Int) {
+
+        val remoteSurfaceView = SurfaceView(this)
         remoteSurfaceView.setZOrderMediaOverlay(true)
         val videoCanvas = VideoCanvas(remoteSurfaceView, VideoCanvas.RENDER_MODE_FIT, remoteUid)
         agoraEngine!!.setupRemoteVideo(videoCanvas)
-        remoteSurfaceView.visibility = VISIBLE*/
+        remoteSurfaceView.visibility = VISIBLE
 
 
-        if (binding.remoteVideoView.childCount > 1) {
+       /* if (binding.remoteVideoView.childCount > 1) {
             return
         }
         remoteView = RtcEngine.CreateRendererView(baseContext)
@@ -232,7 +231,7 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
                 VideoCanvas.RENDER_MODE_FIT,
                 remoteUid
             )
-        )
+        )*/
     }
 
     private fun checkSelfPermission(): Boolean {
