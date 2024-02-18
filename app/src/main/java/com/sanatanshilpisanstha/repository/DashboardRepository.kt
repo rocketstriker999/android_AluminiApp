@@ -562,7 +562,6 @@ class DashboardRepository(val context: Context) {
             params["length"] = length.toString()
             params["search"] = search
 
-            Log.e("params=====>",params.toString())
             val response = try {
 
                 api.getDirectory(params)
@@ -1186,7 +1185,7 @@ class DashboardRepository(val context: Context) {
     suspend fun getAgoraToken(
         userid: String,
         callAction: String,
-        groupid:String,
+        groupId:String,
         listener: (APIResult<JsonObject>) -> Unit
     ) {
         if (Utilities.isNetworkAvailable(context)) {
@@ -1195,13 +1194,10 @@ class DashboardRepository(val context: Context) {
             val jsonObject = JsonObject()
             jsonObject.addProperty("call_type", "chat")
             jsonObject.addProperty("chat_user_id", userid)
-            jsonObject.addProperty("group_id", groupid)
+            jsonObject.addProperty("group_id", groupId)
             jsonObject.addProperty("call_action", callAction)
 
 
-            //val bodyReq: RequestBody = jsonObject.toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
-
-            Log.e("jsonObject======>", jsonObject.toString())
             val response = try {
                 api.getAgoraToken(jsonObject)
             } catch (e: Exception) {
@@ -1210,66 +1206,23 @@ class DashboardRepository(val context: Context) {
 
             if (response != null && response.isSuccessful) {
                 response.body()?.asJsonObject?.let { jsonObject ->
-                    val apiResponse: APIResponse =
-                        Gson().fromJson(jsonObject, object : TypeToken<APIResponse>() {}.type)
+                    val apiResponse: APIResponse = Gson().fromJson(jsonObject, object : TypeToken<APIResponse>() {}.type)
 
                     when (response.code()) {
                         HTTPCode.SUCCESS.code -> {
                             if (jsonObject.has("success") && !jsonObject.get("success").isJsonNull) {
                                 if (jsonObject.get("success").asBoolean) {
-
-                                    if (jsonObject.has("data") && !jsonObject.get("data").isJsonNull) {
-                                        Log.d("jsondata", jsonObject.get("data").toString())
-
-                                    }
-                                    var msg = ""
-                                    if (jsonObject.has("message") && !jsonObject.get("message").isJsonNull) {
-                                        msg = jsonObject.get("message").asString
-
-
-                                        Log.d("token11", msg)
-                                    }
-
-                                    listener(
-                                        APIResult.Success(
-                                            jsonObject, msg
-
-                                        )
-                                    )
-
+                                    listener(APIResult.Success(jsonObject,apiResponse.message))
                                 } else {
-                                    if (jsonObject.has("message") && !jsonObject.get("message").isJsonNull) {
-                                        listener(
-                                            APIResult.Failure(
-                                                APIErrorCode.NO_RESPONSE,
-                                                jsonObject.get("message").asString
-                                            )
-                                        )
-                                    } else {
-                                        listener(
-                                            APIResult.Failure(
-                                                APIErrorCode.NO_RESPONSE,
-                                                context.resources.getString(R.string.error_msg)
-                                            )
-                                        )
-                                    }
+                                    listener(APIResult.Failure(APIErrorCode.NO_RESPONSE,apiResponse.message))
                                 }
                             } else {
-                                listener(
-                                    APIResult.Failure(
-                                        APIErrorCode.NO_RESPONSE, apiResponse.message
-                                    )
-                                )
+                                listener(APIResult.Failure(APIErrorCode.NO_RESPONSE, apiResponse.message))
                             }
                         }
 
-                        else -> {
-                            listener(
-                                APIResult.Failure(
-                                    APIErrorCode.NO_RESPONSE, apiResponse.message
-                                )
-                            )
-                        }
+                        else -> listener(APIResult.Failure( APIErrorCode.NO_RESPONSE, apiResponse.message))
+
                     }
 
                     return

@@ -495,25 +495,19 @@ class HomeFragment : Fragment(), OnClickListener, GroupAdapter.GroupClick,
 
                 when (it) {
                     is APIResult.Success -> {
-                        Log.e("response=====>",it.message.toString())
                         if(pd!=null && pd.isShowing) {
                             pd.cancel()
                         }
-
                     }
 
                     is APIResult.Failure -> {
                         pd.cancel()
-//                        Utilities.showErrorSnackBar(binding.cvRoot, it.message.toString())
                     }
 
                     APIResult.InProgress -> {
                         pd.show()
                     }
 
-                    else -> {
-
-                    }
                 }
             }
         }
