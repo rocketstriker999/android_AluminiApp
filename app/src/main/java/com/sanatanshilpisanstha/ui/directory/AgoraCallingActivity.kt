@@ -84,13 +84,6 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
                 leaveChannel()
             }
 
-            override fun onConnectionStateChanged(state: Int, reason: Int) {
-                if (state == CONNECTION_STATE_DISCONNECTED) {
-                    leaveChannel()
-                }
-
-            }
-
 
             override fun onError(err: Int) {
                 Toast.makeText(this@AgoraCallingActivity, "error $err", Toast.LENGTH_SHORT).show()
