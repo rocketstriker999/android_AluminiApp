@@ -225,12 +225,10 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
 
 
     fun leaveChannel() {
-
+        sendMessage("You left the Call")
         agoraEngine!!.stopPreview()
-
         if (isJoined) {
             agoraEngine!!.leaveChannel()
-            sendMessage("You left the Call")
             isJoined=false
             agoraEngine=null
         }
