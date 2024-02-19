@@ -85,6 +85,10 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
             }
 
 
+
+
+
+
             override fun onError(err: Int) {
                 Toast.makeText(this@AgoraCallingActivity, "error $err", Toast.LENGTH_SHORT).show()
                 when (err) {
@@ -229,8 +233,13 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
         if (isJoined) {
             agoraEngine!!.leaveChannel()
             sendMessage("You left the Call")
+            isJoined=false
+            agoraEngine=null
+            RtcEngine.destroy()
+
         }
-        RtcEngine.destroy()
+
+
         finish()
     }
 
