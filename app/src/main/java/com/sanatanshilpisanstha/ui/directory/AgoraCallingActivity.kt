@@ -238,7 +238,7 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
             sendMessage("You left the Call")
         }
         RtcEngine.destroy()
-        onBackPressed()
+        finish()
     }
 
 
