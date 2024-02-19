@@ -1664,7 +1664,6 @@ class   GroupRepository(val context: Context) {
              }
 
 
-            Log.e("Params=====>",params.toString())
             val response = try {
                 if(fromDirectory) {
                     api.getChatListing(params)

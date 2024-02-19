@@ -138,8 +138,8 @@ dependencies {
     //For product flavour multiple google service json
     implementation 'com.google.android.gms:play-services-maps:18.2.0'
     implementation 'com.google.maps.android:android-maps-utils:3.4.0'
-    implementation 'io.agora.rtc:full-sdk:4.0.1'
 
+    implementation 'io.agora.rtc:full-sdk:4.2.6'
 //Pusher Chat
     implementation 'com.pusher:pusher-java-client:2.4.4'
     implementation 'com.google.code.gson:gson:2.10.1'

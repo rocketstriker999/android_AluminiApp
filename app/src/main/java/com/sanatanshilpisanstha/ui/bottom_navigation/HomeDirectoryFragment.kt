@@ -111,9 +111,6 @@ class HomeDirectoryFragment : Fragment(), DirectoryAdapter.ItemClick {
         directoryList.clear()
         getDirectory(parentActivity.latitude!!, parentActivity.longitude!!, lastPage, length, search)
 
-
-        Log.e("TAG=====>", parentActivity.latitude.toString())
-
         binding.ivProfile.setOnClickListener {
             val intent = Intent(requireContext(), FillProfileActivity::class.java)
             this.startActivity(intent)
@@ -128,9 +125,6 @@ class HomeDirectoryFragment : Fragment(), DirectoryAdapter.ItemClick {
         binding.searchUser.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                // on below line we are checking
-                // if query exist or not.
-                Log.e("query======>",query.toString())
                 search=query!!
                 directoryList.clear()
                 getDirectory(parentActivity.latitude!!, parentActivity.longitude!!, start, length, search)
