@@ -3,6 +3,7 @@ package com.sanatanshilpisanstha.ui.directory
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.SurfaceView
 import android.view.View
 import android.view.View.INVISIBLE
@@ -21,6 +22,7 @@ import com.sanatanshilpisanstha.utility.Extra
 import com.sanatanshilpisanstha.utility.Utilities
 import io.agora.rtc2.ChannelMediaOptions
 import io.agora.rtc2.Constants
+import io.agora.rtc2.Constants.CONNECTION_STATE_DISCONNECTED
 import io.agora.rtc2.IRtcEngineEventHandler
 import io.agora.rtc2.RtcEngine
 import io.agora.rtc2.RtcEngineConfig
@@ -68,19 +70,47 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
                 isJoined = true
                 sendMessage("Remote user joined $uid")
                 runOnUiThread { setupRemoteVideo(uid) }
+                runOnUiThread { setupLocalVideo(uid) }
+
             }
 
             override fun onJoinChannelSuccess(channel: String, uid: Int, elapsed: Int) {
                 isJoined = true
+                Toast.makeText(this@AgoraCallingActivity, "joinS", Toast.LENGTH_SHORT).show()
+
                 sendMessage("Joined Channel $channel")
-                runOnUiThread { setupLocalVideo(uid) }
+            //    runOnUiThread { setupLocalVideo(uid) }
             }
 
             override fun onUserOffline(uid: Int, reason: Int) {
                 sendMessage("Remote user offline $uid $reason")
+                endCall()
+                Toast.makeText(this@AgoraCallingActivity, "offline", Toast.LENGTH_SHORT).show()
+
+            }
+            override fun onRemoteVideoStats(stats: RemoteVideoStats) {
+                Toast.makeText(this@AgoraCallingActivity, "Video Not revice", Toast.LENGTH_SHORT).show()
+
             }
 
+
+
+            override fun onConnectionStateChanged(state: Int, reason: Int) {
+                if (state == CONNECTION_STATE_DISCONNECTED) {
+
+                    Toast.makeText(this@AgoraCallingActivity, "Video Not revice", Toast.LENGTH_SHORT).show()
+
+
+                }
+                else {
+
+                }
+
+            }
+
+
             override fun onError(err: Int) {
+                Toast.makeText(this@AgoraCallingActivity, "error $err", Toast.LENGTH_SHORT).show()
                 when (err) {
                     ErrorCode.ERR_TOKEN_EXPIRED -> sendMessage("Your token has expired")
                     ErrorCode.ERR_INVALID_TOKEN -> sendMessage("Your token is invalid")
@@ -148,13 +178,16 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
             setupAgoraEngine()
         }
         val options = ChannelMediaOptions()
-        options.channelProfile = Constants.CHANNEL_PROFILE_COMMUNICATION
+       // options.channelProfile = Constants.CHANNEL_PROFILE_COMMUNICATION
 
-        if (isBroadCaster) {
-            options.clientRoleType = Constants.CLIENT_ROLE_BROADCASTER
-        } else {
-            options.clientRoleType = Constants.CLIENT_ROLE_AUDIENCE
-        }
+//        if (isBroadCaster) {
+//            options.clientRoleType = Constants.CLIENT_ROLE_BROADCASTER
+//        } else {
+//            options.clientRoleType = Constants.CLIENT_ROLE_AUDIENCE
+//        }
+        options.channelProfile = Constants.CHANNEL_PROFILE_COMMUNICATION
+        options.clientRoleType = Constants.CLIENT_ROLE_BROADCASTER
+
         agoraEngine!!.startPreview()
         agoraEngine!!.joinChannel(token, channelName, preferenceManager.personID, options)
     }
@@ -201,6 +234,7 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
         )
         binding.remoteVideoView.addView(remoteSurfaceView)
         agoraEngine!!.setupRemoteVideo(videoCanvas)
+
     }
 
     private fun checkSelfPermission(): Boolean {
@@ -222,12 +256,15 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
 
     private fun endCall() {
         leaveChannel()
+        agoraEngine!!.disableVideo()
+
     }
 
     fun leaveChannel() {
         if (isJoined) {
             agoraEngine!!.leaveChannel()
             sendMessage("You left the channel")
+            finish()
         }
 
         onBackPressed()
@@ -277,7 +314,6 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
             dashboardRepository.getAgoraToken(userId, "video", groupID) {
                 when (it) {
                     is APIResult.Success -> {
-
                         joinChannel(
                             it.data.getAsJsonObject("data").get("channel_name").asString,
                             it.data.getAsJsonObject("data").get("agora_token").asString,

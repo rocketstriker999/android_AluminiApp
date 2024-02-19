@@ -1195,8 +1195,8 @@ class DashboardRepository(val context: Context) {
             jsonObject.addProperty("call_type", "chat")
             jsonObject.addProperty("chat_user_id", userid)
             jsonObject.addProperty("group_id", groupId)
-            jsonObject.addProperty("call_action", callAction)
-
+            jsonObject.addProperty("call_action", "video")
+            Log.d("chatid", userid)
 
             val response = try {
                 api.getAgoraToken(jsonObject)
