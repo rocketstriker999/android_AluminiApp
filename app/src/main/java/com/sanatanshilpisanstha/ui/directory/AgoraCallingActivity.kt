@@ -3,7 +3,6 @@ package com.sanatanshilpisanstha.ui.directory
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.SurfaceView
 import android.view.View
 import android.view.View.INVISIBLE
@@ -22,7 +21,6 @@ import com.sanatanshilpisanstha.utility.Extra
 import com.sanatanshilpisanstha.utility.Utilities
 import io.agora.rtc2.ChannelMediaOptions
 import io.agora.rtc2.Constants
-import io.agora.rtc2.Constants.CONNECTION_STATE_DISCONNECTED
 import io.agora.rtc2.IRtcEngineEventHandler
 import io.agora.rtc2.RtcEngine
 import io.agora.rtc2.RtcEngineConfig
@@ -169,10 +167,14 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
             agoraEngine = RtcEngine.create(config)
             agoraEngine!!.enableVideo()
 
-            agoraEngine!!.setVideoEncoderConfiguration(VideoEncoderConfiguration(VideoEncoderConfiguration.VD_640x360,
-                VideoEncoderConfiguration.FRAME_RATE.FRAME_RATE_FPS_15,
-                VideoEncoderConfiguration.STANDARD_BITRATE,
-                VideoEncoderConfiguration.ORIENTATION_MODE.ORIENTATION_MODE_FIXED_PORTRAIT))
+            agoraEngine!!.setVideoEncoderConfiguration(
+                VideoEncoderConfiguration(
+                    VideoEncoderConfiguration.VD_640x360,
+                    VideoEncoderConfiguration.FRAME_RATE.FRAME_RATE_FPS_15,
+                    VideoEncoderConfiguration.STANDARD_BITRATE,
+                    VideoEncoderConfiguration.ORIENTATION_MODE.ORIENTATION_MODE_FIXED_PORTRAIT
+                )
+            )
 
         } catch (e: Exception) {
             e.printStackTrace()
@@ -223,14 +225,13 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
     }
 
 
-
     fun leaveChannel() {
         sendMessage("You left the Call")
         agoraEngine!!.stopPreview()
         if (isJoined) {
             agoraEngine!!.leaveChannel()
-            isJoined=false
-            agoraEngine=null
+            isJoined = false
+            agoraEngine = null
         }
 
         Thread {
