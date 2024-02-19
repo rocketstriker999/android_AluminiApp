@@ -71,26 +71,22 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
                 sendMessage("Remote user joined $uid")
                 runOnUiThread { setupRemoteVideo(uid) }
                 runOnUiThread { setupLocalVideo(uid) }
-
             }
 
             override fun onJoinChannelSuccess(channel: String, uid: Int, elapsed: Int) {
                 isJoined = true
                 Toast.makeText(this@AgoraCallingActivity, "joinS", Toast.LENGTH_SHORT).show()
-
                 sendMessage("Joined Channel $channel")
-            //    runOnUiThread { setupLocalVideo(uid) }
             }
 
             override fun onUserOffline(uid: Int, reason: Int) {
                 sendMessage("Remote user offline $uid $reason")
                 endCall()
                 Toast.makeText(this@AgoraCallingActivity, "offline", Toast.LENGTH_SHORT).show()
-
             }
+
             override fun onRemoteVideoStats(stats: RemoteVideoStats) {
                 Toast.makeText(this@AgoraCallingActivity, "Video Not revice", Toast.LENGTH_SHORT).show()
-
             }
 
 
@@ -256,19 +252,16 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
 
     private fun endCall() {
         leaveChannel()
-        agoraEngine!!.disableVideo()
 
     }
 
     fun leaveChannel() {
         if (isJoined) {
             agoraEngine!!.leaveChannel()
-            sendMessage("You left the channel")
-            finish()
+            sendMessage("You left the Call")
         }
-
+        RtcEngine.destroy()
         onBackPressed()
-
     }
 
 
@@ -333,29 +326,5 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
         }
     }
 
-    /*private fun startCall() {
-        //setupLocalVideo()
-        joinChannel()
-    }*/
-
-    /* private fun endCall() {
-         removeLocalVideo()
-         removeRemoteVideo()
-         leaveChannel()
-     }*/
-
-    /*private fun removeLocalVideo() {
-        if (localView != null) {
-            binding.localVideoView.removeView(localView)
-        }
-        localView = null
-    }*/
-
-    /*private fun removeRemoteVideo() {
-        if (remoteView != null) {
-            binding.remoteVideoView.removeView(remoteView)
-        }
-        remoteView = null
-    }*/
 
 }
