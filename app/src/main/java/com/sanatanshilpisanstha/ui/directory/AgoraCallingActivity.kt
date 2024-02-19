@@ -81,25 +81,12 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
 
             override fun onUserOffline(uid: Int, reason: Int) {
                 sendMessage("Remote user offline $uid $reason")
-                endCall()
-                Toast.makeText(this@AgoraCallingActivity, "offline", Toast.LENGTH_SHORT).show()
+                leaveChannel()
             }
-
-            override fun onRemoteVideoStats(stats: RemoteVideoStats) {
-                Toast.makeText(this@AgoraCallingActivity, "Video Not revice", Toast.LENGTH_SHORT).show()
-            }
-
-
 
             override fun onConnectionStateChanged(state: Int, reason: Int) {
                 if (state == CONNECTION_STATE_DISCONNECTED) {
-
-                    Toast.makeText(this@AgoraCallingActivity, "Video Not revice", Toast.LENGTH_SHORT).show()
-
-
-                }
-                else {
-
+                    leaveChannel()
                 }
 
             }
@@ -174,13 +161,6 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
             setupAgoraEngine()
         }
         val options = ChannelMediaOptions()
-       // options.channelProfile = Constants.CHANNEL_PROFILE_COMMUNICATION
-
-//        if (isBroadCaster) {
-//            options.clientRoleType = Constants.CLIENT_ROLE_BROADCASTER
-//        } else {
-//            options.clientRoleType = Constants.CLIENT_ROLE_AUDIENCE
-//        }
         options.channelProfile = Constants.CHANNEL_PROFILE_COMMUNICATION
         options.clientRoleType = Constants.CLIENT_ROLE_BROADCASTER
 
@@ -250,10 +230,7 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
         }
     }
 
-    private fun endCall() {
-        leaveChannel()
 
-    }
 
     fun leaveChannel() {
         if (isJoined) {
@@ -269,13 +246,12 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
         when (v) {
             binding.buttonCall -> {
                 if (mEndCall) {
-                    //startCall()
                     mEndCall = false
                     binding.buttonCall.setImageResource(R.drawable.btn_endcall)
                     binding.buttonMute.visibility = VISIBLE
                     binding.buttonSwitchCamera.visibility = VISIBLE
                 } else {
-                    endCall()
+                    leaveChannel()
                     mEndCall = true
                     binding.buttonCall.setImageResource(R.drawable.btn_startcall)
                     binding.buttonMute.visibility = INVISIBLE
