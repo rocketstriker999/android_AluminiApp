@@ -3,6 +3,7 @@ package com.sanatanshilpisanstha.ui.directory
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.SurfaceView
 import android.view.View
 import android.view.View.INVISIBLE
@@ -73,13 +74,15 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
 
             override fun onJoinChannelSuccess(channel: String, uid: Int, elapsed: Int) {
                 isJoined = true
-                Toast.makeText(this@AgoraCallingActivity, "joinS", Toast.LENGTH_SHORT).show()
+                Log.e("print", elapsed.toString() )
                 sendMessage("Joined Channel $channel")
             }
 
             override fun onUserOffline(uid: Int, reason: Int) {
                 sendMessage("Remote user offline $uid $reason")
-                leaveChannel()
+                if (!intent.getStringExtra("chatID").toString().isNullOrBlank()) {
+                    leaveChannel()
+                }
             }
 
             override fun onError(err: Int) {
@@ -106,6 +109,7 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
         setContentView(binding.root)
         binding.buttonCall.setOnClickListener(this)
         binding.buttonSwitchCamera.setOnClickListener(this)
+        binding.buttonMute.setOnClickListener(this)
         dashboardRepository = DashboardRepository(this)
         preferenceManager = PreferenceManager(this)
 
@@ -126,7 +130,8 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
                     false
                 )
             } else {
-                if (!intent.getStringExtra("chatID").toString().isBlank()) {
+                if (!intent.getStringExtra("chatID").toString().isNullOrBlank()) {
+                    Log.d("chatid", intent.getStringExtra("chatID").toString())
                     intent.getStringExtra("chatID")?.let { getToken(it, "") }
                 } else {
                     intent.getStringExtra(Extra.GROUP_ID)?.let { getToken("", it) }
@@ -284,6 +289,7 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
             dashboardRepository.getAgoraToken(userId, "video", groupID) {
                 when (it) {
                     is APIResult.Success -> {
+                        Log.d("token", it.data.getAsJsonObject("data").get("agora_token").asString)
                         joinChannel(
                             it.data.getAsJsonObject("data").get("channel_name").asString,
                             it.data.getAsJsonObject("data").get("agora_token").asString,

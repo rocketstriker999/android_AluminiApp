@@ -726,7 +726,6 @@ class DirectoryChatActivity : BaseActivity(), GroupBottomDialogFragment.ItemClic
 
             binding.videoCallRelative -> {
                 val intent = Intent(this, AgoraCallingActivity::class.java)
-              //  val intent = Intent(this, Calling::class.java)
                 intent.putExtra("chatID",groupId.toString())
                 startActivity(intent)
             }
