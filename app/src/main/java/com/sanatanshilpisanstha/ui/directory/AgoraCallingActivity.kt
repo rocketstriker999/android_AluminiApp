@@ -67,9 +67,9 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
             // Listen for a remote user joining the channel.
             override fun onUserJoined(uid: Int, elapsed: Int) {
                 isJoined = true
-                sendMessage("Remote user joined $uid")
                 runOnUiThread { setupRemoteVideo(uid) }
                 runOnUiThread { setupLocalVideo(uid) }
+                sendMessage("Remote user joined $uid")
             }
 
             override fun onJoinChannelSuccess(channel: String, uid: Int, elapsed: Int) {
@@ -155,6 +155,7 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
         if (agoraEngine == null) {
             setupAgoraEngine()
         }
+
         val options = ChannelMediaOptions()
         options.channelProfile = Constants.CHANNEL_PROFILE_COMMUNICATION
         options.clientRoleType = Constants.CLIENT_ROLE_BROADCASTER
@@ -168,6 +169,7 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
             val config = RtcEngineConfig()
             config.mContext = this
             config.mAppId = appId
+
             config.mEventHandler = iRtcEngineEventHandler
             agoraEngine = RtcEngine.create(config)
             agoraEngine!!.enableVideo()
@@ -270,14 +272,16 @@ class AgoraCallingActivity : BaseActivity(), OnClickListener {
             }
 
             binding.buttonMute -> {
-                mMuted = !mMuted
-                agoraEngine!!.muteLocalAudioStream(mMuted)
-                val res: Int = if (mMuted) {
-                    R.drawable.btn_mute
-                } else {
-                    R.drawable.btn_unmute
+                if (agoraEngine != null) {
+                    mMuted = !mMuted
+                    agoraEngine!!.muteLocalAudioStream(mMuted)
+                    val res: Int = if (mMuted) {
+                        R.drawable.btn_mute
+                    } else {
+                        R.drawable.btn_unmute
+                    }
+                    binding.buttonMute.setImageResource(res)
                 }
-                binding.buttonMute.setImageResource(res)
             }
         }
     }
