@@ -46,6 +46,7 @@ import com.sanatanshilpisanstha.repository.GroupRepository
 import com.sanatanshilpisanstha.ui.adapter.ContactAdapter
 import com.sanatanshilpisanstha.ui.adapter.MessageAdapter
 import com.sanatanshilpisanstha.ui.connect.GroupDetailsActivity
+import com.sanatanshilpisanstha.ui.directory.AgoraCallingActivity
 import com.sanatanshilpisanstha.ui.group.survey.AddSurvey
 import com.sanatanshilpisanstha.utility.*
 import com.sanatanshilpisanstha.utility.Constant.REQUEST_CODE_AUDIO
@@ -153,6 +154,7 @@ class ChatActivity : AppCompatActivity(), GroupBottomDialogFragment.ItemClickLis
         binding.ivSend.setOnClickListener(this)
         binding.ivBack.setOnClickListener(this)
         binding.layGroupDetails.setOnClickListener(this)
+        binding.videoCallRelative.setOnClickListener(this)
     }
 
     private fun showBottomSheet() {
@@ -545,6 +547,12 @@ class ChatActivity : AppCompatActivity(), GroupBottomDialogFragment.ItemClickLis
                 i.putExtra(Extra.GROUP_NAME, groupName)
                 i.putExtra(Extra.GROUP_BANNER, groupBanner)
                 startActivity(i)
+            }
+            binding.videoCallRelative -> {
+                val intent = Intent(this, AgoraCallingActivity::class.java)
+                intent.putExtra(Extra.GROUP_ID,groupId.toString())
+                intent.putExtra("chatID","")
+                startActivity(intent)
             }
 
         }

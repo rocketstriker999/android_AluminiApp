@@ -1188,15 +1188,23 @@ class DashboardRepository(val context: Context) {
         groupId:String,
         listener: (APIResult<JsonObject>) -> Unit
     ) {
+        var calltype:String=""
+        if (!userid.equals("")){
+            calltype="chat"
+        }
+        else
+            calltype="group"
+
         if (Utilities.isNetworkAvailable(context)) {
             listener(APIResult.InProgress)
 
             val jsonObject = JsonObject()
-            jsonObject.addProperty("call_type", "chat")
+            jsonObject.addProperty("call_type", calltype)
             jsonObject.addProperty("chat_user_id", userid)
             jsonObject.addProperty("group_id", groupId)
             jsonObject.addProperty("call_action", "video")
             Log.d("chatid", userid)
+            Log.d("CALLTYPE", calltype)
 
             val response = try {
                 api.getAgoraToken(jsonObject)
